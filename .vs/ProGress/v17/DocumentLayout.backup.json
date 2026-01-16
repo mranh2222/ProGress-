@@ -95,8 +95,8 @@
       "RelativeMoniker": "D:0:0:{18D55804-A65A-4A97-A13E-07EFC6F7D670}|ProGress\\ProGress.vbproj|solutionrelative:progress\\content\\bootstrap.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeTest\\ProGress\\progress\\services\\firebaseservice.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:progress\\services\\firebaseservice.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeTest\\ProGress\\ProGress\\Services\\FirebaseService.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ProGress\\Services\\FirebaseService.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
     }
   ],
   "DocumentGroupContainers": [
@@ -133,82 +133,74 @@
               "RelativeDocumentMoniker": "ProGress\\App_Data\\Uploads\\0e0f3b19-a7da-4729-9f1a-7b5f6c9ed6c9_1.$et",
               "ToolTip": "D:\\CodeTest\\ProGress\\ProGress\\App_Data\\Uploads\\0e0f3b19-a7da-4729-9f1a-7b5f6c9ed6c9_1.$et",
               "RelativeToolTip": "ProGress\\App_Data\\Uploads\\0e0f3b19-a7da-4729-9f1a-7b5f6c9ed6c9_1.$et",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-12-29T09:37:32.573Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-29T09:37:32.573Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 15,
-              "Title": "e15349b9-ebb4-4a79-a8e6-b2ed043d333b_bui-quoc-huy.jpg - Bitmap [1111x1111, 24 bit, JPG]",
+              "Title": "e15349b9-ebb4-4a79-a8e6-b2ed043d333b_bui-quoc-huy.jpg",
               "DocumentMoniker": "D:\\CodeTest\\ProGress\\ProGress\\App_Data\\Images\\e15349b9-ebb4-4a79-a8e6-b2ed043d333b_bui-quoc-huy.jpg",
               "RelativeDocumentMoniker": "ProGress\\App_Data\\Images\\e15349b9-ebb4-4a79-a8e6-b2ed043d333b_bui-quoc-huy.jpg",
-              "ToolTip": "D:\\CodeTest\\ProGress\\ProGress\\App_Data\\Images\\e15349b9-ebb4-4a79-a8e6-b2ed043d333b_bui-quoc-huy.jpg - Bitmap [1111x1111, 24 bit, JPG]",
-              "RelativeToolTip": "ProGress\\App_Data\\Images\\e15349b9-ebb4-4a79-a8e6-b2ed043d333b_bui-quoc-huy.jpg - Bitmap [1111x1111, 24 bit, JPG]",
+              "ToolTip": "D:\\CodeTest\\ProGress\\ProGress\\App_Data\\Images\\e15349b9-ebb4-4a79-a8e6-b2ed043d333b_bui-quoc-huy.jpg",
+              "RelativeToolTip": "ProGress\\App_Data\\Images\\e15349b9-ebb4-4a79-a8e6-b2ed043d333b_bui-quoc-huy.jpg",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001533|",
-              "WhenOpened": "2025-12-29T09:37:24.683Z",
-              "EditorCaption": " - Bitmap [1111x1111, 24 bit, JPG]"
+              "WhenOpened": "2025-12-29T09:37:24.683Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 16,
-              "Title": "c14f5dd2-36fe-4818-be06-f2880d202e8b_ronaldo.jpg - Bitmap [1920x1200, 24 bit, JPG]",
+              "Title": "c14f5dd2-36fe-4818-be06-f2880d202e8b_ronaldo.jpg",
               "DocumentMoniker": "D:\\CodeTest\\ProGress\\ProGress\\App_Data\\Images\\c14f5dd2-36fe-4818-be06-f2880d202e8b_ronaldo.jpg",
               "RelativeDocumentMoniker": "ProGress\\App_Data\\Images\\c14f5dd2-36fe-4818-be06-f2880d202e8b_ronaldo.jpg",
-              "ToolTip": "D:\\CodeTest\\ProGress\\ProGress\\App_Data\\Images\\c14f5dd2-36fe-4818-be06-f2880d202e8b_ronaldo.jpg - Bitmap [1920x1200, 24 bit, JPG]",
-              "RelativeToolTip": "ProGress\\App_Data\\Images\\c14f5dd2-36fe-4818-be06-f2880d202e8b_ronaldo.jpg - Bitmap [1920x1200, 24 bit, JPG]",
+              "ToolTip": "D:\\CodeTest\\ProGress\\ProGress\\App_Data\\Images\\c14f5dd2-36fe-4818-be06-f2880d202e8b_ronaldo.jpg",
+              "RelativeToolTip": "ProGress\\App_Data\\Images\\c14f5dd2-36fe-4818-be06-f2880d202e8b_ronaldo.jpg",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001533|",
-              "WhenOpened": "2025-12-29T09:37:23.824Z",
-              "EditorCaption": " - Bitmap [1920x1200, 24 bit, JPG]"
+              "WhenOpened": "2025-12-29T09:37:23.824Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 17,
-              "Title": "6739cbee-21bd-4d7c-932f-f10a7ba6a1cb_ronaldo.jpg - Bitmap [1920x1200, 24 bit, JPG]",
+              "Title": "6739cbee-21bd-4d7c-932f-f10a7ba6a1cb_ronaldo.jpg",
               "DocumentMoniker": "D:\\CodeTest\\ProGress\\ProGress\\App_Data\\Images\\6739cbee-21bd-4d7c-932f-f10a7ba6a1cb_ronaldo.jpg",
               "RelativeDocumentMoniker": "ProGress\\App_Data\\Images\\6739cbee-21bd-4d7c-932f-f10a7ba6a1cb_ronaldo.jpg",
-              "ToolTip": "D:\\CodeTest\\ProGress\\ProGress\\App_Data\\Images\\6739cbee-21bd-4d7c-932f-f10a7ba6a1cb_ronaldo.jpg - Bitmap [1920x1200, 24 bit, JPG]",
-              "RelativeToolTip": "ProGress\\App_Data\\Images\\6739cbee-21bd-4d7c-932f-f10a7ba6a1cb_ronaldo.jpg - Bitmap [1920x1200, 24 bit, JPG]",
+              "ToolTip": "D:\\CodeTest\\ProGress\\ProGress\\App_Data\\Images\\6739cbee-21bd-4d7c-932f-f10a7ba6a1cb_ronaldo.jpg",
+              "RelativeToolTip": "ProGress\\App_Data\\Images\\6739cbee-21bd-4d7c-932f-f10a7ba6a1cb_ronaldo.jpg",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001533|",
-              "WhenOpened": "2025-12-29T09:37:22.951Z",
-              "EditorCaption": " - Bitmap [1920x1200, 24 bit, JPG]"
+              "WhenOpened": "2025-12-29T09:37:22.951Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 18,
-              "Title": "559ba53f-0ca8-46bb-814a-2b69e227da61_messi.jpg - Bitmap [1938x1080, 24 bit, JPG]",
+              "Title": "559ba53f-0ca8-46bb-814a-2b69e227da61_messi.jpg",
               "DocumentMoniker": "D:\\CodeTest\\ProGress\\ProGress\\App_Data\\Images\\559ba53f-0ca8-46bb-814a-2b69e227da61_messi.jpg",
               "RelativeDocumentMoniker": "ProGress\\App_Data\\Images\\559ba53f-0ca8-46bb-814a-2b69e227da61_messi.jpg",
-              "ToolTip": "D:\\CodeTest\\ProGress\\ProGress\\App_Data\\Images\\559ba53f-0ca8-46bb-814a-2b69e227da61_messi.jpg - Bitmap [1938x1080, 24 bit, JPG]",
-              "RelativeToolTip": "ProGress\\App_Data\\Images\\559ba53f-0ca8-46bb-814a-2b69e227da61_messi.jpg - Bitmap [1938x1080, 24 bit, JPG]",
+              "ToolTip": "D:\\CodeTest\\ProGress\\ProGress\\App_Data\\Images\\559ba53f-0ca8-46bb-814a-2b69e227da61_messi.jpg",
+              "RelativeToolTip": "ProGress\\App_Data\\Images\\559ba53f-0ca8-46bb-814a-2b69e227da61_messi.jpg",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001533|",
-              "WhenOpened": "2025-12-29T09:37:22.199Z",
-              "EditorCaption": " - Bitmap [1938x1080, 24 bit, JPG]"
+              "WhenOpened": "2025-12-29T09:37:22.199Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 19,
-              "Title": "214a152c-e3d9-41e5-b201-46ca5437bdc2_messi.jpg - Bitmap [1938x1080, 24 bit, JPG]",
+              "Title": "214a152c-e3d9-41e5-b201-46ca5437bdc2_messi.jpg",
               "DocumentMoniker": "D:\\CodeTest\\ProGress\\ProGress\\App_Data\\Images\\214a152c-e3d9-41e5-b201-46ca5437bdc2_messi.jpg",
               "RelativeDocumentMoniker": "ProGress\\App_Data\\Images\\214a152c-e3d9-41e5-b201-46ca5437bdc2_messi.jpg",
-              "ToolTip": "D:\\CodeTest\\ProGress\\ProGress\\App_Data\\Images\\214a152c-e3d9-41e5-b201-46ca5437bdc2_messi.jpg - Bitmap [1938x1080, 24 bit, JPG]",
-              "RelativeToolTip": "ProGress\\App_Data\\Images\\214a152c-e3d9-41e5-b201-46ca5437bdc2_messi.jpg - Bitmap [1938x1080, 24 bit, JPG]",
+              "ToolTip": "D:\\CodeTest\\ProGress\\ProGress\\App_Data\\Images\\214a152c-e3d9-41e5-b201-46ca5437bdc2_messi.jpg",
+              "RelativeToolTip": "ProGress\\App_Data\\Images\\214a152c-e3d9-41e5-b201-46ca5437bdc2_messi.jpg",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001533|",
-              "WhenOpened": "2025-12-29T09:37:21.39Z",
-              "EditorCaption": " - Bitmap [1938x1080, 24 bit, JPG]"
+              "WhenOpened": "2025-12-29T09:37:21.39Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 20,
-              "Title": "1329541c-d6d3-4523-94c1-2b53062d4ec7_ronaldo.jpg - Bitmap [1920x1200, 24 bit, JPG]",
+              "Title": "1329541c-d6d3-4523-94c1-2b53062d4ec7_ronaldo.jpg",
               "DocumentMoniker": "D:\\CodeTest\\ProGress\\ProGress\\App_Data\\Images\\1329541c-d6d3-4523-94c1-2b53062d4ec7_ronaldo.jpg",
               "RelativeDocumentMoniker": "ProGress\\App_Data\\Images\\1329541c-d6d3-4523-94c1-2b53062d4ec7_ronaldo.jpg",
-              "ToolTip": "D:\\CodeTest\\ProGress\\ProGress\\App_Data\\Images\\1329541c-d6d3-4523-94c1-2b53062d4ec7_ronaldo.jpg - Bitmap [1920x1200, 24 bit, JPG]",
-              "RelativeToolTip": "ProGress\\App_Data\\Images\\1329541c-d6d3-4523-94c1-2b53062d4ec7_ronaldo.jpg - Bitmap [1920x1200, 24 bit, JPG]",
+              "ToolTip": "D:\\CodeTest\\ProGress\\ProGress\\App_Data\\Images\\1329541c-d6d3-4523-94c1-2b53062d4ec7_ronaldo.jpg",
+              "RelativeToolTip": "ProGress\\App_Data\\Images\\1329541c-d6d3-4523-94c1-2b53062d4ec7_ronaldo.jpg",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001533|",
-              "WhenOpened": "2025-12-29T09:37:20.273Z",
-              "EditorCaption": " - Bitmap [1920x1200, 24 bit, JPG]"
+              "WhenOpened": "2025-12-29T09:37:20.273Z"
             },
             {
               "$type": "Document",
@@ -220,6 +212,18 @@
               "RelativeToolTip": "ProGress\\App_Data\\Images\\f0d9abd7-880f-442c-8fb8-c00358de470f_snapedit_1765658644885.jpeg",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001533|",
               "WhenOpened": "2025-12-29T09:37:29.548Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "FirebaseService.vb",
+              "DocumentMoniker": "D:\\CodeTest\\ProGress\\ProGress\\Services\\FirebaseService.vb",
+              "RelativeDocumentMoniker": "ProGress\\Services\\FirebaseService.vb",
+              "ToolTip": "D:\\CodeTest\\ProGress\\ProGress\\Services\\FirebaseService.vb",
+              "RelativeToolTip": "ProGress\\Services\\FirebaseService.vb",
+              "ViewState": "AgIAAEMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2025-12-29T03:07:30.677Z"
             },
             {
               "$type": "Document",
@@ -364,18 +368,6 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
               "WhenOpened": "2025-12-29T07:53:45.938Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 23,
-              "Title": "FirebaseService.vb",
-              "DocumentMoniker": "D:\\CodeTest\\ProGress\\ProGress\\Services\\FirebaseService.vb",
-              "RelativeDocumentMoniker": "ProGress\\Services\\FirebaseService.vb",
-              "ToolTip": "D:\\CodeTest\\ProGress\\ProGress\\Services\\FirebaseService.vb",
-              "RelativeToolTip": "ProGress\\Services\\FirebaseService.vb",
-              "ViewState": "AgIAAEMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2025-12-29T03:07:30.677Z"
             },
             {
               "$type": "Document",
