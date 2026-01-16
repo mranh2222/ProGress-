@@ -17,6 +17,123 @@
     End If
 End Code
 
+<style>
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .table {
+        font-size: 0.8rem;
+        width: 100%;
+        table-layout: auto;
+        min-width: 1400px;
+    }
+    
+    .table thead th {
+        font-size: 0.75rem;
+        font-weight: 600;
+        padding: 0.5rem 0.4rem;
+        white-space: nowrap;
+        background-color: var(--primary-color) !important;
+        color: white !important;
+        border: 1px solid var(--primary-darker);
+        vertical-align: middle;
+        text-align: center;
+    }
+    
+    .table thead th:nth-child(10),
+    .table thead th:nth-child(11) {
+        white-space: normal;
+        line-height: 1.3;
+    }
+    
+    .table tbody td {
+        font-size: 0.8rem;
+        padding: 0.5rem 0.4rem;
+        vertical-align: middle;
+        word-wrap: break-word;
+        word-break: break-word;
+        max-width: 200px;
+    }
+    
+    .table tbody td:first-child {
+        max-width: 100px;
+    }
+    
+    .table tbody td:nth-child(2),
+    .table tbody td:nth-child(10),
+    .table tbody td:nth-child(11) {
+        max-width: 120px;
+        white-space: nowrap;
+    }
+    
+    .table tbody td:nth-child(3),
+    .table tbody td:nth-child(4),
+    .table tbody td:nth-child(6),
+    .table tbody td:nth-child(8) {
+        max-width: 150px;
+    }
+    
+    .table tbody td:nth-child(5) {
+        max-width: 180px;
+    }
+    
+    .table tbody td:nth-child(7) {
+        max-width: 250px;
+        min-width: 200px;
+    }
+    
+    .table tbody td:nth-child(9) {
+        max-width: 140px;
+        white-space: nowrap;
+    }
+    
+    .table tbody td:last-child {
+        max-width: 120px;
+        white-space: nowrap;
+    }
+    
+    .table .badge {
+        font-size: 0.7rem;
+        padding: 0.25rem 0.5rem;
+    }
+    
+    .table .status-badge {
+        font-size: 0.7rem;
+        padding: 0.25rem 0.5rem;
+        white-space: nowrap;
+    }
+    
+    .table .btn-group .btn {
+        font-size: 0.7rem;
+        padding: 0.25rem 0.5rem;
+    }
+    
+    .table .btn-group .btn i {
+        font-size: 0.7rem;
+    }
+    
+    .table-hover tbody tr:hover {
+        background-color: rgba(37, 99, 235, 0.05);
+    }
+    
+    .table-bordered {
+        border: 1px solid #dee2e6;
+    }
+    
+    .table-bordered th,
+    .table-bordered td {
+        border: 1px solid #dee2e6;
+    }
+    
+    @@media (max-width: 1400px) {
+        .table {
+            min-width: 100%;
+        }
+    }
+</style>
+
 <div class="container-fluid">
     <div class="row mb-4">
         <div class="col-12 text-center mb-3">
@@ -34,8 +151,8 @@ End Code
     <div class="card">
         <div class="card-body">
             @If hasTasks Then
-                @<div class="table-responsive table-scroll-container">
-                    <table class="table table-hover table-bordered">
+                @<div class="table-responsive" style="max-height: 80vh; overflow-y: auto;">
+                    <table class="table table-hover table-bordered table-sm">
                         <thead class="table-light">
                             <tr>
                                 <th>Tag</th>
@@ -47,8 +164,8 @@ End Code
                                 <th>Mô tả lỗi / nội dung hỗ trợ</th>
                                 <th>Kỹ thuật phụ trách</th>
                                 <th>Tình trạng</th>
-                                <th>Ngày dự kiến hoàn thành</th>
-                                <th>Ngày thực tế hoàn thành</th>
+                                <th style="white-space: normal; line-height: 1.3;">Ngày dự kiến<br />hoàn thành</th>
+                                <th style="white-space: normal; line-height: 1.3;">Ngày thực tế<br />hoàn thành</th>
                                 <th>Thao tác</th>
                             </tr>
                         </thead>
@@ -106,14 +223,16 @@ End Code
                                             End If
                                         End Code
                                     </td>
-                                    <td>
+                                    <td style="max-width: 250px;">
                                         @Code
                                             Dim desc = If(item.Description, "")
-                                            If desc IsNot Nothing AndAlso desc.Length > 50 Then
-                                                desc = desc.Substring(0, 50) & "..."
-                                            End If
+                                            ' Strip HTML tags để hiển thị preview
                                             If Not String.IsNullOrEmpty(desc) Then
-                                                WriteLiteral(desc)
+                                                Dim plainText = System.Text.RegularExpressions.Regex.Replace(desc, "<.*?>", "")
+                                                If plainText.Length > 80 Then
+                                                    plainText = plainText.Substring(0, 80) & "..."
+                                                End If
+                                                WriteLiteral(plainText)
                                             Else
                                                 WriteLiteral("<span class=""text-muted"">-</span>")
                                             End If
@@ -131,7 +250,7 @@ End Code
                                             Case TaskStatus.Completed
                                                 @<span class="status-badge status-completed">🟢 Đã hoàn thành</span>
                                             Case TaskStatus.Paused
-                                                @<span class="status-badge status-paused">🔴 Tạm dừng</span>
+                                                @<span class="status-badge status-paused">🔴 Quá hạn</span>
                                         End Select
                                     </td>
                                     <td>
@@ -157,6 +276,9 @@ End Code
                                             <a href="@Url.Action("Details", "Tasks", New With {.id = item.Id})" class="btn btn-sm btn-info" title="Xem chi tiết">
                                                 <i class="fas fa-eye"></i>
                                             </a>
+                                            <button type="button" class="btn btn-sm btn-outline-primary btn-save-task" data-id="@item.Id" data-saved="@item.IsSaved.ToString().ToLower()" title="@(If(item.IsSaved, "Bỏ lưu", "Lưu câu trả lời"))">
+                                                <i class="fas fa-bookmark @(If(item.IsSaved, "text-danger", ""))"></i>
+                                            </button>
                                             <a href="@Url.Action("Edit", "Tasks", New With {.id = item.Id})" class="btn btn-sm btn-warning" title="Chỉnh sửa">
                                                 <i class="fas fa-edit"></i>
                                             </a>
@@ -182,3 +304,37 @@ End Code
         </div>
     </div>
 </div>
+
+@Section scripts
+    <script>
+        $(document).ready(function() {
+            $('.btn-save-task').click(function() {
+                var btn = $(this);
+                var id = btn.data('id');
+                var currentSaved = btn.data('saved');
+                var newSaved = !currentSaved;
+                
+                $.ajax({
+                    url: '@Url.Action("ToggleSaved", "Tasks")',
+                    type: 'POST',
+                    data: { id: id, isSaved: newSaved },
+                    success: function(response) {
+                        if (response.success) {
+                            btn.data('saved', newSaved);
+                            var icon = btn.find('i');
+                            if (newSaved) {
+                                icon.addClass('text-danger');
+                                btn.attr('title', 'Bỏ lưu');
+                            } else {
+                                icon.removeClass('text-danger');
+                                btn.attr('title', 'Lưu câu trả lời');
+                            }
+                        } else {
+                            alert('Có lỗi xảy ra khi thực hiện thao tác.');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+End Section

@@ -1,8 +1,10 @@
 Imports System
+Imports System.Web.Mvc
 
 Public Class Task
     Public Property Id As String
     Public Property Tag As String ' Tag công việc
+    <AllowHtml>
     Public Property Description As String ' Mô tả lỗi / nội dung hỗ trợ
     Public Property CustomerName As String
     Public Property FileReceivedDate As DateTime? ' Ngày nhận file
@@ -20,6 +22,7 @@ Public Class Task
     Public Property UpdatedDate As DateTime?
     Public Property Solution As String
     Public Property ResponseToCustomer As String
+    Public Property IsSaved As Boolean ' Đánh dấu câu trả lời đã lưu
     Public Property Attachments As List(Of String) ' URLs của file đính kèm
     Public Property Images As List(Of String) ' URLs của hình ảnh
     Public Property History As List(Of TaskHistory)

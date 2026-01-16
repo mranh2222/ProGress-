@@ -186,6 +186,10 @@
     <Compile Include="Controllers\DashboardController.vb" />
     <Compile Include="Controllers\FileController.vb" />
     <Compile Include="Controllers\TechniciansController.vb" />
+    <Compile Include="Controllers\QuestionsController.vb" />
+    <Compile Include="Controllers\SettingsController.vb" />
+    <Compile Include="Controllers\AccountController.vb" />
+    <Compile Include="Models\User.vb" />
     <Compile Include="Models\Task.vb" />
     <Compile Include="Models\TaskStatus.vb" />
     <Compile Include="Models\TaskHistory.vb" />
@@ -193,7 +197,9 @@
     <Compile Include="Models\SupportPlatform.vb" />
     <Compile Include="Models\SaleManager.vb" />
     <Compile Include="Models\Software.vb" />
-    <Compile Include="Services\FirebaseService.vb" />
+    <Compile Include="Models\Question.vb" />
+    <Compile Include="Services\SqlDataService.vb" />
+    <Compile Include="Services\FileStorageService.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -297,6 +303,9 @@
     <Content Include="Views\Tasks\Details.vbhtml" />
     <Content Include="Views\Tasks\Delete.vbhtml" />
     <Content Include="Views\Technicians\Create.vbhtml" />
+    <Content Include="Views\Questions\Index.vbhtml" />
+    <Content Include="Views\Questions\Create.vbhtml" />
+    <Content Include="Views\Questions\Details.vbhtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -17,6 +17,14 @@ Public Module RouteConfig
             constraints:=New With {.id = ".+"}
         )
 
+        ' Route cho Questions với ID (GUID)
+        routes.MapRoute(
+            name:="Questions",
+            url:="Questions/{action}/{id}",
+            defaults:=New With {.controller = "Questions", .action = "Index", .id = UrlParameter.Optional},
+            constraints:=New With {.id = ".+"}
+        )
+
         routes.MapRoute(
             name:="Default",
             url:="{controller}/{action}/{id}",

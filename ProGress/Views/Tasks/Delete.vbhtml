@@ -59,7 +59,7 @@ End Code
                                 Case TaskStatus.Completed
                                     @<span class="status-badge status-completed">🟢 Đã hoàn thành</span>
                                 Case TaskStatus.Paused
-                                    @<span class="status-badge status-paused">🔴 Tạm dừng</span>
+                                    @<span class="status-badge status-paused">🔴 Quá hạn</span>
                             End Select
                         </dd>
                     </dl>

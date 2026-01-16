@@ -6,5 +6,15 @@ ProGress
 </name>
 </assembly>
 <members>
+<member name="M:ProGress.FileStorageService.UploadFileAsync(System.Web.HttpPostedFileBase,System.String)">
+ <summary>
+ Upload file lên thư mục local (Synchronous wrap in Task)
+ </summary>
+</member>
+<member name="M:ProGress.FileStorageService.UploadFileAsync(System.Byte[],System.String,System.String,System.String)">
+ <summary>
+ Upload file từ byte array (Synchronous wrap in Task)
+ </summary>
+</member>
 </members>
 </doc>

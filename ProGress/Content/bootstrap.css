@@ -4262,7 +4262,7 @@ textarea.form-control-lg {
 .card-header {
   padding: var(--bs-card-cap-padding-y) var(--bs-card-cap-padding-x);
   margin-bottom: 0;
-  color: var(--bs-card-cap-color);
+  color: black;
   background-color: var(--bs-card-cap-bg);
   border-bottom: var(--bs-card-border-width) solid var(--bs-card-border-color);
 }
@@ -7703,9 +7703,11 @@ textarea.form-control-lg {
 .mb-1 {
   margin-bottom: 0.25rem !important;
 }
-
+.mb-1 h1 {
+    color: white;
+}
 .mb-2 {
-  margin-bottom: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
 }
 
 .mb-3 {

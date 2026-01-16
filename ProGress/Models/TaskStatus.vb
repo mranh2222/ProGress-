@@ -3,5 +3,5 @@ Public Enum TaskStatus
     InProgress = 1   ' Đang xử lý
     Waiting = 2      ' Chờ phản hồi khách hàng
     Completed = 3   ' Đã hoàn thành
-    Paused = 4      ' Tạm dừng / quá hạn
+    Paused = 4      ' Quá hạn
 End Enum

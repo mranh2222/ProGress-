@@ -7,3 +7,13 @@ Public Class SaleManager
         Id = Guid.NewGuid().ToString()
     End Sub
 End Class
+
+
+
+
+
+
+
+
+
+

@@ -1,6 +1,7 @@
 Imports System.Web.Mvc
 Imports System.IO
 Imports System.Web
+Imports System.Threading.Tasks
 
 Public Class FileController
     Inherits Controller
@@ -16,9 +17,15 @@ Public Class FileController
             Return HttpNotFound()
         End If
         
-        ' Loại bỏ /App_Data/ để lấy đường dẫn thực
-        Dim relativePath = filePath.Replace("/App_Data/", "").Replace("App_Data/", "")
-        Dim physicalPath = Server.MapPath("~/App_Data/" & relativePath)
+        ' Chuyển đổi URL thành đường dẫn vật lý
+        Dim relativePath = filePath
+        If relativePath.StartsWith("/") Then
+            relativePath = "~" & relativePath
+        Else
+            relativePath = "~/" & relativePath
+        End If
+        
+        Dim physicalPath = Server.MapPath(relativePath)
         
         If Not System.IO.File.Exists(physicalPath) Then
             Return HttpNotFound()
@@ -43,7 +50,7 @@ Public Class FileController
                 contentType = "application/msword"
             Case ".txt", ".log"
                 contentType = "text/plain"
-            Case ".edb"
+            Case ".edb", ".fdb"
                 contentType = "application/octet-stream"
         End Select
         

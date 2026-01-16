@@ -19,33 +19,32 @@ End Code
 
     h1 {
         color: var(--primary-darker);
-        font-weight: 700;
-        font-size: 2rem;
-        margin-bottom: 0;
+        font-weight: 600;
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
     }
 
     .form-section {
-        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-        border-radius: 15px;
-        padding: 2rem;
-        margin-bottom: 2rem;
-        border: 2px solid #e5f7ed;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        background: #f8f9fa;
+        border-radius: 8px;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border: 1px solid #e5e7eb;
     }
 
     .form-label {
-        font-weight: 600;
+        font-weight: 500;
         color: #374151;
-        margin-bottom: 0.75rem;
-        font-size: 0.95rem;
+        margin-bottom: 0.4rem;
+        font-size: 0.8rem;
     }
 
     .form-control {
-        border: 2px solid #e5e7eb;
-        border-radius: 10px;
-        padding: 0.75rem 1rem;
-        font-size: 0.95rem;
-        transition: all 0.3s ease;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        padding: 0.4rem 0.65rem;
+        font-size: 0.8rem;
+        transition: all 0.2s ease;
     }
 
     .form-control:focus {
@@ -56,10 +55,10 @@ End Code
     }
 
     .btn {
-        border-radius: 10px;
-        padding: 0.75rem 2rem;
-        font-weight: 600;
-        font-size: 1rem;
+        border-radius: 6px;
+        padding: 0.4rem 1rem;
+        font-weight: 500;
+        font-size: 0.8rem;
     }
 
     .btn-primary {

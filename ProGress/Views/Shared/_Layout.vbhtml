@@ -9,77 +9,338 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <style>
         :root {
-            --primary-color: #22c55e;
-            --primary-dark: #16a34a;
-            --primary-darker: #15803d;
+            --primary-color: #4CAF50;
+            --primary-dark: #388E3C;
+            --primary-darker: #388E3C;
+            --primary-light: #C8E6C9;
             --secondary-color: #64748b;
-            --success-color: #22c55e;
-            --warning-color: #f59e0b;
-            --danger-color: #ef4444;
-            --info-color: #3b82f6;
+            --success-color: #4CAF50;
+            --warning-color: #FFCA00;
+            --danger-color: #B30208;
+            --info-color: #0D6EFD;
+            --info-light: #A8CBFE;
+            --info-dark: #094BAC;
             --dark-color: #1e293b;
-            --light-color: #f0fdf4;
+            --light-color: #f0f9ff;
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
             min-height: 100vh;
+            margin: 0;
+            padding: 0;
         }
-
-        .navbar {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-darker) 100%) !important;
-            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+        
+        .sidebar {
+            width: 70px;
+            height: 100vh;
+            background: linear-gradient(180deg, var(--primary-color) 0%, var(--primary-darker) 100%);
+            box-shadow: 2px 0 12px rgba(76, 175, 80, 0.25);
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            overflow-x: visible !important;
+        }
+        
+        .sidebar-nav {
+            flex: 1;
             padding: 1rem 0;
-            border-bottom: 3px solid var(--primary-darker);
+            overflow: visible;
+            position: relative;
         }
-
-        .navbar-brand {
+        
+        .sidebar-nav .nav-item {
+            position: relative;
+            overflow: visible;
+        }
+        
+        .sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .sidebar::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .sidebar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 3px;
+        }
+        
+        .sidebar::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+        
+        .sidebar-header {
+            padding: 1rem 0.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+        
+        .sidebar-brand {
             font-weight: 700;
-            font-size: 1.6rem;
+            font-size: 1.1rem;
             color: white !important;
             text-shadow: 0 2px 4px rgba(0,0,0,0.2);
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 0.5rem;
+            text-decoration: none;
+            flex-direction: column;
         }
-
-        .navbar-brand i {
-            font-size: 1.8rem;
+        
+        .sidebar-brand:hover {
+            color: white !important;
         }
-
+        
+        .sidebar-brand span {
+            display: none;
+        }
+        
+        .sidebar-subtitle {
+            display: none;
+        }
+        
         .company-logo {
-            height: 40px;
+            height: 35px;
             width: auto;
-            margin-right: 10px;
             object-fit: contain;
             filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
         }
-
-        .navbar-nav .nav-link {
-            color: rgba(255,255,255,0.95) !important;
+        
+        .sidebar-nav {
+            flex: 1;
+            padding: 1rem 0;
+            overflow: visible;
+            position: relative;
+        }
+        
+        .sidebar-nav .nav-link {
+            color: rgba(255,255,255,0.9) !important;
             font-weight: 500;
-            margin: 0 0.5rem;
-            padding: 0.5rem 1rem !important;
+            padding: 0.75rem !important;
+            margin: 0.25rem 0.5rem;
             border-radius: 8px;
             transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            position: relative;
         }
-
-        .navbar-nav .nav-link:hover {
+        
+        .sidebar-nav .nav-link i {
+            width: 24px;
+            text-align: center;
+            font-size: 1.2rem;
+        }
+        
+        .sidebar-nav .nav-link span {
+            display: none;
+        }
+        
+        .sidebar-nav .nav-link:hover {
             color: white !important;
             background-color: rgba(255,255,255,0.15);
-            transform: translateY(-2px);
         }
-
+        
+        .sidebar-nav .nav-link.active {
+            background-color: rgba(255,255,255,0.2);
+            color: white !important;
+            font-weight: 600;
+        }
+        
+        /* Tooltip sẽ được xử lý bằng JavaScript */
+        .sidebar-nav .nav-link {
+            position: relative;
+        }
+        
+        .sidebar-nav .nav-item {
+            position: relative;
+            overflow: visible !important;
+        }
+        
+        /* Đảm bảo tooltip không bị che bởi các element khác */
+        .sidebar-nav .nav-link:hover {
+            z-index: 10003;
+        }
+        
+        /* Side Panel cho Create Menu */
+        .create-panel {
+            position: fixed;
+            left: 70px;
+            top: 0;
+            width: 280px;
+            height: 100vh;
+            background: linear-gradient(180deg, var(--primary-color) 0%, var(--primary-darker) 100%);
+            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
+            z-index: 9999;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            overflow-y: auto;
+            overflow-x: hidden;
+            visibility: hidden;
+            opacity: 0;
+        }
+        
+        .create-panel.show {
+            transform: translateX(0);
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        .create-panel-header {
+            padding: 1.5rem 1.5rem 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .create-panel-header h3 {
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        .create-panel-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background-color 0.2s;
+        }
+        
+        .create-panel-close:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .create-panel-body {
+            padding: 1rem;
+        }
+        
+        .create-panel-item {
+            display: block;
+            width: 100%;
+            padding: 1rem 1.5rem;
+            margin-bottom: 0.75rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .create-panel-item:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateX(5px);
+            color: white;
+            text-decoration: none;
+        }
+        
+        .create-panel-item i {
+            font-size: 1.5rem;
+            width: 30px;
+            text-align: center;
+        }
+        
+        .create-panel-item-content {
+            flex: 1;
+        }
+        
+        .create-panel-item-title {
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .create-panel-item-desc {
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+        
+        /* Overlay khi panel mở */
+        .create-panel-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.3);
+            z-index: 9998;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        
+        .create-panel-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
         .main-content {
-            min-height: calc(100vh - 200px);
-            padding: 2rem 0;
+            margin-left: 70px;
+            min-height: 100vh;
+            padding: 2rem;
+            width: calc(100% - 70px);
+        }
+        
+        @@media (max-width: 768px) {
+            .sidebar {
+                width: 70px;
+            }
+            
+            .sidebar-header {
+                padding: 1rem 0.5rem;
+            }
+            
+            .sidebar-brand span:not(.company-logo) {
+                display: none;
+            }
+            
+            .sidebar-header div {
+                display: none;
+            }
+            
+            .sidebar-nav .nav-link span {
+                display: none;
+            }
+            
+            .main-content {
+                margin-left: 70px;
+                width: calc(100% - 70px);
+                padding: 1rem;
+            }
+            
+            .create-panel {
+                width: 100%;
+                left: 0;
+            }
         }
 
         .card {
             border: none;
             border-radius: 16px;
-            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.1);
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.1);
             transition: all 0.3s;
             margin-bottom: 1.5rem;
             background: white;
@@ -87,7 +348,7 @@
         }
 
         .card:hover {
-            box-shadow: 0 8px 24px rgba(34, 197, 94, 0.2);
+            box-shadow: 0 8px 24px rgba(76, 175, 80, 0.2);
             transform: translateY(-4px);
         }
 
@@ -107,12 +368,12 @@
             padding: 0.7rem 1.8rem;
             font-weight: 600;
             transition: all 0.3s;
-            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(34, 197, 94, 0.4);
+            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
             background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-darker) 100%);
         }
 
@@ -123,12 +384,12 @@
             padding: 0.7rem 1.8rem;
             font-weight: 600;
             transition: all 0.3s;
-            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
         }
 
         .btn-success:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(34, 197, 94, 0.4);
+            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
         }
 
         .btn-info {
@@ -199,7 +460,7 @@
             border-radius: 16px;
             padding: 0;
             margin-bottom: 1.5rem;
-            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.1);
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.1);
             border-top: 4px solid var(--primary-color);
             overflow: hidden;
             word-wrap: break-word;
@@ -272,6 +533,17 @@
             line-height: 1.4;
             margin-bottom: 0.5rem;
             overflow: hidden;
+            color: #1e293b !important;
+            font-weight: 500 !important;
+            text-decoration: none !important;
+            font-size: 0.85rem !important;
+        }
+        
+        .kanban-card h6 * {
+            color: #1e293b !important;
+            font-weight: 500 !important;
+            text-decoration: none !important;
+            background: transparent !important;
         }
 
         .kanban-card p {
@@ -334,14 +606,14 @@
             border-radius: 16px;
             padding: 2rem;
             text-align: center;
-            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.1);
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.1);
             transition: all 0.3s;
             border-top: 4px solid var(--primary-color);
         }
 
         .stat-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 12px 28px rgba(34, 197, 94, 0.2);
+            box-shadow: 0 12px 28px rgba(37, 99, 235, 0.2);
         }
 
         .stat-number {
@@ -352,6 +624,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            color: transparent;
         }
 
         .stat-label {
@@ -379,7 +652,7 @@
 
         .form-control:focus, .form-select:focus {
             border-color: var(--primary-color);
-            box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.15);
+            box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.15);
             outline: none;
         }
 
@@ -447,14 +720,14 @@
             position: sticky;
             top: 0;
             z-index: 10;
-            background-color: #22c55e;
+            background-color: #4CAF50;
         }
 
         .table-scroll-container table thead th {
-            background-color: #22c55e;
+            background-color: #4CAF50;
             color: white;
             font-weight: 600;
-            border-bottom: 2px solid #16a34a;
+            border-bottom: 2px solid #388E3C;
             padding: 1rem;
             white-space: nowrap;
         }
@@ -490,8 +763,8 @@
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-darker) 100%);
             color: white;
             padding: 2rem 0;
-            margin-top: 3rem;
-            box-shadow: 0 -4px 12px rgba(34, 197, 94, 0.2);
+            margin-top: 0;
+            box-shadow: 0 -4px 12px rgba(76, 175, 80, 0.2);
             border-top: 3px solid var(--primary-darker);
         }
 
@@ -506,126 +779,241 @@
     @RenderSection("styles", required:=False)
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="@Url.Action("Index", "Dashboard")">
-                <img src="@Url.Content("~/Content/Images/logo.png")" alt="Ketcau Soft Logo" class="company-logo">
-                <span>Ketcau Soft</span>
-                <span class="ketcau-brand" style="font-size: 0.7rem; opacity: 0.8; margin-left: 0.5rem;">Task Manager</span>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <a class="sidebar-brand" href="@Url.Action("Index", "Dashboard")">
+                <img src="@Url.Content("~/Content/Images/logo.png")" alt="KetcauSoft Logo" class="company-logo">
+                <span>KetcauSoft</span>
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("Index", "Dashboard")">
-                            <i class="fas fa-home me-1"></i>Dashboard
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("Index", "Tasks")">
-                            <i class="fas fa-list me-1"></i>Danh sách công việc
-                        </a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="createDropdown" role="button" data-bs-toggle="dropdown" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
-                            <i class="fas fa-plus-circle me-1"></i>Tạo mới
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="createDropdown">
-                            <li>
-                                <a class="dropdown-item" href="@Url.Action("Create", "Tasks")">
-                                    <i class="fas fa-tasks me-2"></i>Tạo công việc mới
-                                </a>
-                            </li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li>
-                                <a class="dropdown-item" href="@Url.Action("Create", "Technicians")">
-                                    <i class="fas fa-user-plus me-2"></i>Thêm kỹ thuật viên
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
+            <div class="sidebar-subtitle">Task Manager</div>
         </div>
-    </nav>
+        
+        <nav class="sidebar-nav">
+            <ul class="navbar-nav flex-column">
+                <li class="nav-item">
+                    @Code
+                        Dim isDashboardActive = If(ViewContext.RouteData.Values("controller").ToString() = "Dashboard", "active", "")
+                    End Code
+                    <a class="nav-link @isDashboardActive" href="@Url.Action("Index", "Dashboard")" data-tooltip="Dashboard">
+                        <i class="fas fa-home"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    @Code
+                        Dim isTasksActive = If(ViewContext.RouteData.Values("controller").ToString() = "Tasks", "active", "")
+                    End Code
+                    <a class="nav-link @isTasksActive" href="@Url.Action("Index", "Tasks")" data-tooltip="Danh sách công việc">
+                        <i class="fas fa-list"></i>
+                        <span>Danh sách công việc</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    @Code
+                        Dim isQuestionsActive = If(ViewContext.RouteData.Values("controller").ToString() = "Questions", "active", "")
+                    End Code
+                    <a class="nav-link @isQuestionsActive" href="@Url.Action("Index", "Questions")" data-tooltip="Câu trả lời đã lưu">
+                        <i class="fas fa-bookmark"></i>
+                        <span>Câu trả lời đã lưu</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" id="openCreatePanel" data-tooltip="Tạo mới">
+                        <i class="fas fa-plus-circle"></i>
+                        <span>Tạo mới</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    @Code
+                        Dim isSettingsActive = If(ViewContext.RouteData.Values("controller").ToString() = "Settings", "active", "")
+                    End Code
+                    <a class="nav-link @isSettingsActive" href="@Url.Action("Index", "Settings")" data-tooltip="Cài đặt">
+                        <i class="fas fa-cog"></i>
+                        <span>Cài đặt</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
 
-    <div class="container-fluid main-content">
+    <!-- Create Panel -->
+    <div class="create-panel-overlay" id="createPanelOverlay"></div>
+    <div class="create-panel" id="createPanel">
+        <div class="create-panel-header">
+            <h3><i class="fas fa-plus-circle me-2"></i>Tạo mới</h3>
+            <button class="create-panel-close" id="closeCreatePanel" aria-label="Đóng">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="create-panel-body">
+            <a href="@Url.Action("Create", "Tasks")" class="create-panel-item">
+                <i class="fas fa-tasks"></i>
+                <div class="create-panel-item-content">
+                    <div class="create-panel-item-title">Tạo công việc mới</div>
+                    <div class="create-panel-item-desc">Thêm một công việc mới vào hệ thống</div>
+                </div>
+            </a>
+            <a href="@Url.Action("Create", "Technicians")" class="create-panel-item">
+                <i class="fas fa-user-plus"></i>
+                <div class="create-panel-item-content">
+                    <div class="create-panel-item-title">Thêm kỹ thuật viên</div>
+                    <div class="create-panel-item-desc">Thêm thành viên kỹ thuật mới</div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
         @RenderBody()
     </div>
 
-    <footer>
-        <div class="container-fluid text-center">
-            <p class="mb-2" style="font-size: 1.1rem; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
-                <img src="@Url.Content("~/Content/Images/logo.png")" alt="Ketcau Soft Logo" style="height: 30px; width: auto; object-fit: contain;">
-                Ketcau Soft - Hệ thống quản lý công việc kỹ thuật
-            </p>
-            <p class="mb-0" style="opacity: 0.8;">&copy; @DateTime.Now.Year - Bản quyền thuộc về Ketcau Soft</p>
-        </div>
-    </footer>
+    @Html.Partial("_Footer")
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     <script>
-        // Khởi tạo Bootstrap dropdown
+        // Khởi tạo Create Panel và Tooltip
         (function() {
-            function initDropdowns() {
-                var dropdowns = document.querySelectorAll('.dropdown-toggle');
+            function initCreatePanel() {
+                var openBtn = document.getElementById('openCreatePanel');
+                var closeBtn = document.getElementById('closeCreatePanel');
+                var panel = document.getElementById('createPanel');
+                var overlay = document.getElementById('createPanelOverlay');
                 
-                // Bootstrap 5
-                if (typeof bootstrap !== 'undefined' && bootstrap.Dropdown) {
-                    dropdowns.forEach(function(dropdownEl) {
-                        try {
-                            if (!bootstrap.Dropdown.getInstance(dropdownEl)) {
-                                new bootstrap.Dropdown(dropdownEl);
-                            }
-                        } catch (e) {
-                            console.log('Bootstrap 5 dropdown error:', e);
-                        }
+                if (!panel || !overlay) {
+                    return;
+                }
+                
+                // Đảm bảo panel ẩn mặc định
+                panel.classList.remove('show');
+                overlay.classList.remove('show');
+                
+                function openPanel() {
+                    panel.classList.add('show');
+                    overlay.classList.add('show');
+                    document.body.style.overflow = 'hidden';
+                }
+                
+                function closePanel() {
+                    panel.classList.remove('show');
+                    overlay.classList.remove('show');
+                    document.body.style.overflow = '';
+                }
+                
+                if (openBtn) {
+                    openBtn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        openPanel();
                     });
                 }
-                // Bootstrap 4 fallback (jQuery)
-                else if (typeof jQuery !== 'undefined' && jQuery.fn.dropdown) {
-                    jQuery('.dropdown-toggle').dropdown();
+                
+                if (closeBtn) {
+                    closeBtn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        closePanel();
+                    });
                 }
-                // Fallback: Toggle bằng JavaScript thuần
-                else {
-                    dropdowns.forEach(function(dropdownEl) {
-                        dropdownEl.addEventListener('click', function(e) {
-                            e.preventDefault();
-                            var menu = this.nextElementSibling;
-                            if (menu && menu.classList.contains('dropdown-menu')) {
-                                menu.classList.toggle('show');
-                                this.setAttribute('aria-expanded', menu.classList.contains('show'));
-                            }
-                        });
+                
+                if (overlay) {
+                    overlay.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        closePanel();
+                    });
+                }
+                
+                // Đóng panel khi nhấn ESC
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape' && panel.classList.contains('show')) {
+                        closePanel();
+                    }
+                });
+            }
+            
+            function initTooltips() {
+                var navLinks = document.querySelectorAll('.sidebar-nav .nav-link[data-tooltip]');
+                var tooltipEl = null;
+                
+                navLinks.forEach(function(link) {
+                    var tooltip = link.getAttribute('data-tooltip');
+                    if (!tooltip) return;
+                    
+                    link.addEventListener('mouseenter', function(e) {
+                        var rect = link.getBoundingClientRect();
+                        
+                        if (!tooltipEl) {
+                            tooltipEl = document.createElement('div');
+                            tooltipEl.className = 'custom-tooltip';
+                            document.body.appendChild(tooltipEl);
+                        }
+                        
+                        tooltipEl.textContent = tooltip;
+                        tooltipEl.style.display = 'block';
+                        
+                        // Tính toán vị trí
+                        var left = rect.right + 15;
+                        var top = rect.top + (rect.height / 2);
+                        
+                        tooltipEl.style.left = left + 'px';
+                        tooltipEl.style.top = top + 'px';
+                        tooltipEl.style.transform = 'translateY(-50%)';
+                        tooltipEl.style.opacity = '1';
+                        tooltipEl.style.visibility = 'visible';
                     });
                     
-                    // Đóng dropdown khi click outside
-                    document.addEventListener('click', function(e) {
-                        if (!e.target.closest('.dropdown')) {
-                            document.querySelectorAll('.dropdown-menu.show').forEach(function(menu) {
-                                menu.classList.remove('show');
-                            });
-                            document.querySelectorAll('.dropdown-toggle[aria-expanded="true"]').forEach(function(toggle) {
-                                toggle.setAttribute('aria-expanded', 'false');
-                            });
+                    link.addEventListener('mouseleave', function() {
+                        if (tooltipEl) {
+                            tooltipEl.style.opacity = '0';
+                            tooltipEl.style.visibility = 'hidden';
                         }
                     });
-                }
+                });
             }
             
             // Khởi tạo khi DOM ready
             if (document.readyState === 'loading') {
                 document.addEventListener('DOMContentLoaded', function() {
-                    setTimeout(initDropdowns, 100);
+                    initCreatePanel();
+                    initTooltips();
                 });
             } else {
-                setTimeout(initDropdowns, 100);
+                initCreatePanel();
+                initTooltips();
             }
         })();
     </script>
+    
+    <style>
+        .custom-tooltip {
+            position: fixed;
+            padding: 0.5rem 0.75rem;
+            background-color: rgba(0, 0, 0, 0.95);
+            color: white;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.15s ease, visibility 0.15s ease;
+            z-index: 10001;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            font-weight: 500;
+        }
+        
+        .custom-tooltip::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: 6px solid transparent;
+            border-right-color: rgba(0, 0, 0, 0.95);
+        }
+    </style>
     @RenderSection("scripts", required:=False)
 </body>
 </html>
