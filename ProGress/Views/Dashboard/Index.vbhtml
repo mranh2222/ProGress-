@@ -1,4 +1,4 @@
-@ModelType IEnumerable(Of Task)
+﻿@ModelType IEnumerable(Of Task)
 @Code
     ViewData("Title") = "Dashboard - Ketcau Soft"
     Dim tasksByStatus = TryCast(ViewBag.TasksByStatus, Dictionary(Of TaskStatus, List(Of Task)))

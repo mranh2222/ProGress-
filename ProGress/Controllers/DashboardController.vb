@@ -71,7 +71,7 @@ Public Class DashboardController
             ' Tách các lệnh SQL theo từ khóa GO
             Dim commands = System.Text.RegularExpressions.Regex.Split(script, "^\s*GO\s*$", System.Text.RegularExpressions.RegexOptions.Multiline Or System.Text.RegularExpressions.RegexOptions.IgnoreCase)
             
-            Using conn As New SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings("DefaultConnection").ConnectionString)
+            Using conn As New SqlConnection("Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=ProGressDB;Integrated Security=True")
                 Await conn.OpenAsync()
                 For Each cmdText In commands
                     If Not String.IsNullOrWhiteSpace(cmdText) Then

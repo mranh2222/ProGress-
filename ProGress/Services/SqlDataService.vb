@@ -4,7 +4,7 @@ Imports System.Collections.Generic
 Imports ThreadingTask = System.Threading.Tasks
 
 Public Class SqlDataService
-    Private ReadOnly _connectionString As String = ConfigurationManager.ConnectionStrings("DefaultConnection").ConnectionString
+    Private ReadOnly _connectionString As String = "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=ProGressDB;Integrated Security=True"
 
     ' ========== TECHNICIANS ==========
     Public Async Function GetAllTechniciansAsync() As ThreadingTask.Task(Of List(Of Technician))
