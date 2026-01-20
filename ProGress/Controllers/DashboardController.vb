@@ -1,6 +1,7 @@
 Imports System.Web.Mvc
 Imports System.Linq
 Imports System.Data.SqlClient
+Imports System.Configuration
 Imports ThreadingTask = System.Threading.Tasks
 
 Public Class DashboardController
@@ -71,7 +72,15 @@ Public Class DashboardController
             ' Tách các lệnh SQL theo từ khóa GO
             Dim commands = System.Text.RegularExpressions.Regex.Split(script, "^\s*GO\s*$", System.Text.RegularExpressions.RegexOptions.Multiline Or System.Text.RegularExpressions.RegexOptions.IgnoreCase)
             
-            Using conn As New SqlConnection("Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=ProGressDB;Integrated Security=True")
+            Dim connectionString As String
+            Dim configConnectionString = ConfigurationManager.ConnectionStrings("DefaultConnection")
+            If configConnectionString IsNot Nothing AndAlso Not String.IsNullOrEmpty(configConnectionString.ConnectionString) Then
+                connectionString = configConnectionString.ConnectionString
+            Else
+                connectionString = "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=ProGressDB;Integrated Security=True"
+            End If
+            
+            Using conn As New SqlConnection(connectionString)
                 Await conn.OpenAsync()
                 For Each cmdText In commands
                     If Not String.IsNullOrWhiteSpace(cmdText) Then

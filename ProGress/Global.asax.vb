@@ -13,7 +13,14 @@ Public Class MvcApplication
     End Sub
     
     Protected Sub Application_BeginRequest(sender As Object, e As EventArgs)
-        Response.ContentType = "text/html; charset=utf-8"
+        Response.ContentEncoding = System.Text.Encoding.UTF8
         Response.Charset = "utf-8"
+        If Response.ContentType Is Nothing OrElse Not Response.ContentType.Contains("charset") Then
+            If Response.ContentType Is Nothing Then
+                Response.ContentType = "text/html; charset=utf-8"
+            Else
+                Response.ContentType = Response.ContentType & "; charset=utf-8"
+            End If
+        End If
     End Sub
 End Class

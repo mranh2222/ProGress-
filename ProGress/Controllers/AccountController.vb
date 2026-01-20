@@ -8,9 +8,19 @@ Imports Newtonsoft.Json
 Public Class AccountController
     Inherits Controller
 
-    Private ReadOnly _connectionString As String = "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=ProGressDB;Integrated Security=True"
+    Private ReadOnly _connectionString As String
     Private ReadOnly _apiUrl As String = ConfigurationManager.AppSettings("ExternalServerApiUrl")
     Private ReadOnly _httpClient As New HttpClient()
+    
+    Public Sub New()
+        Dim configConnectionString = ConfigurationManager.ConnectionStrings("DefaultConnection")
+        If configConnectionString IsNot Nothing AndAlso Not String.IsNullOrEmpty(configConnectionString.ConnectionString) Then
+            _connectionString = configConnectionString.ConnectionString
+        Else
+            ' Fallback cho local development
+            _connectionString = "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=ProGressDB;Integrated Security=True"
+        End If
+    End Sub
 
     ' GET: Account/Login
     Function Login() As ActionResult

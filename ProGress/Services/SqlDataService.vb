@@ -4,7 +4,17 @@ Imports System.Collections.Generic
 Imports ThreadingTask = System.Threading.Tasks
 
 Public Class SqlDataService
-    Private ReadOnly _connectionString As String = "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=ProGressDB;Integrated Security=True"
+    Private ReadOnly _connectionString As String
+    
+    Public Sub New()
+        Dim configConnectionString = ConfigurationManager.ConnectionStrings("DefaultConnection")
+        If configConnectionString IsNot Nothing AndAlso Not String.IsNullOrEmpty(configConnectionString.ConnectionString) Then
+            _connectionString = configConnectionString.ConnectionString
+        Else
+            ' Fallback cho local development
+            _connectionString = "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=ProGressDB;Integrated Security=True"
+        End If
+    End Sub
 
     ' ========== TECHNICIANS ==========
     Public Async Function GetAllTechniciansAsync() As ThreadingTask.Task(Of List(Of Technician))
