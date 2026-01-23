@@ -6,6 +6,12 @@ ProGress
 </name>
 </assembly>
 <members>
+<member name="M:ProGress.SetupController.Index">
+ <summary>
+ Đường dẫn: /Setup
+ Tự động tạo các bảng trong database dựa trên file DATABASE_SETUP.sql
+ </summary>
+</member>
 <member name="M:ProGress.FileStorageService.UploadFileAsync(System.Web.HttpPostedFileBase,System.String)">
  <summary>
  Upload file lên thư mục local (Synchronous wrap in Task)

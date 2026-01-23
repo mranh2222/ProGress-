@@ -85,8 +85,8 @@ End Code
                         <div class="row g-2">
                             @For Each imgUrl In Model.Images
                                 @<div class="col-md-3 col-sm-4 col-6">
-                                    <a href="@imgUrl" target="_blank" class="image-lightbox">
-                                        <img src="@imgUrl" alt="Hình ảnh" class="img-thumbnail w-100" style="height: 120px; object-fit: cover; cursor: pointer;" />
+                                    <a href="@Url.Action("Preview", "File", New With {.filePath = imgUrl})" target="_blank" class="image-lightbox">
+                                        <img src="@Url.Action("Preview", "File", New With {.filePath = imgUrl})" alt="Hình ảnh" class="img-thumbnail w-100" style="height: 120px; object-fit: cover; cursor: pointer;" />
                                     </a>
                                 </div>
                             Next
@@ -105,7 +105,7 @@ End Code
                     <div class="card-body p-3">
                         <div class="d-flex flex-wrap gap-2">
                             @For Each fileUrl In Model.Attachments
-                                @<a href="@fileUrl" target="_blank" class="btn btn-outline-primary btn-sm">
+                                @<a href="@Url.Action("Download", "File", New With {.filePath = fileUrl})" target="_blank" class="btn btn-outline-primary btn-sm">
                                     <i class="fas fa-download me-1"></i>@System.IO.Path.GetFileName(fileUrl.Split("?"c)(0))
                                 </a>
                             Next

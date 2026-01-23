@@ -46,6 +46,11 @@ End Code
             box-shadow: 0 2px 8px rgba(76, 175, 80, 0.2);
         }
 
+        .dashboard-container {
+            max-width: 1700px;
+            margin: 0 auto;
+        }
+
         .stat-card {
             background: white;
             border-radius: 8px;
@@ -56,6 +61,8 @@ End Code
             height: 100%;
             display: flex;
             flex-direction: column;
+            cursor: pointer;
+            user-select: none;
         }
 
         .stat-card:hover {
@@ -142,6 +149,93 @@ End Code
         .stat-number.waiting { color: #f59e0b; }
         .stat-number.completed { color: #10b981; }
         .stat-number.paused { color: #ef4444; }
+
+        /* Modal danh sách theo trạng thái (gọn gàng, chuyên nghiệp) */
+        #statusTasksModal .modal-header {
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        #statusTasksModal .modal-title {
+            font-weight: 700;
+            font-size: 1rem;
+            color: #111827;
+        }
+
+        #statusTasksModal .modal-body {
+            padding: 0.75rem 1rem;
+        }
+
+        #statusTasksModal .table {
+            margin-bottom: 0;
+        }
+
+        #statusTasksModal .table thead th {
+            position: sticky;
+            top: 0;
+            z-index: 1;
+            background: #f8fafc !important;
+            color: #334155 !important;
+            font-size: 0.75rem;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+            border-bottom: 1px solid #e5e7eb !important;
+            padding: 0.6rem 0.75rem;
+        }
+
+        #statusTasksModal .table td {
+            padding: 0.65rem 0.75rem;
+            border-color: #eef2f7;
+            font-size: 0.875rem;
+            color: #0f172a;
+            vertical-align: middle;
+        }
+
+        #statusTasksModal .table tbody tr:hover {
+            background: #f8fafc;
+        }
+
+        .task-desc-clamp {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            line-height: 1.35;
+            max-width: 520px;
+            color: #111827;
+            font-weight: 600;
+        }
+
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.25rem 0.55rem;
+            border-radius: 999px;
+            background: #f8fafc;
+            border: 1px solid #e5e7eb;
+            font-size: 0.8rem;
+            color: #334155;
+            white-space: nowrap;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .dot-pending { background: #fbbf24; }
+        .dot-inprogress { background: #3b82f6; }
+        .dot-waiting { background: #f59e0b; }
+        .dot-completed { background: #10b981; }
+        .dot-paused { background: #ef4444; }
+
+        #statusTasksModal .btn {
+            font-size: 0.8rem;
+            padding: 0.25rem 0.6rem;
+        }
 
         .chart-card {
             background: white;
@@ -315,6 +409,20 @@ End Code
             padding: 0.75rem 1rem !important;
             font-size: 0.9rem !important;
             font-weight: 600 !important;
+            display: flex !important;
+            align-items: center !important;
+            gap: 0.75rem !important;
+            flex-wrap: wrap !important;
+        }
+        
+        .kanban-column h5 .status-badge {
+            margin-right: 0 !important;
+            margin: 0 !important;
+        }
+        
+        .kanban-column h5 .badge.bg-secondary {
+            margin-left: 0 !important;
+            margin: 0 !important;
         }
         
         .kanban-column-content {
@@ -328,45 +436,122 @@ End Code
             box-shadow: 0 1px 4px rgba(0,0,0,0.06) !important;
             border-left: 3px solid var(--primary-color) !important;
             position: relative !important;
+            background: #fff !important;
+            min-height: 140px !important;
+            display: flex !important;
+            flex-direction: column !important;
         }
         
         .kanban-card h6 {
             font-size: 0.85rem !important;
-            margin-bottom: 0.4rem !important;
-            padding-right: 130px !important;
+            margin-bottom: 0.75rem !important;
+            display: -webkit-box !important;
+            -webkit-line-clamp: 2 !important;
+            -webkit-box-orient: vertical !important;
+            overflow: hidden !important;
+            line-height: 1.4 !important;
+            color: #1f2937 !important;
+            font-weight: 600 !important;
+            padding-right: 0 !important; /* Bỏ padding cũ */
         }
         
-        .kanban-card p {
-            font-size: 0.8rem !important;
-            margin-bottom: 0.4rem !important;
+        .kanban-card .status-row {
+            margin-bottom: 0.75rem !important;
         }
-        
-        .kanban-card small {
-            font-size: 0.75rem !important;
-        }
-        
+
         .kanban-card .status-dropdown {
             font-size: 0.7rem !important;
             padding: 0.2rem 0.4rem !important;
-            position: absolute !important;
-            top: 0.75rem !important;
-            right: 0.75rem !important;
-            z-index: 10 !important;
-            min-width: 120px !important;
+            width: 100% !important; /* Cho rộng đầy ngang thẻ */
+            max-width: 140px !important;
+            background-color: #f8fafc !important;
+            border: 1px solid #e2e8f0 !important;
+            border-radius: 4px !important;
         }
         
-        .kanban-card .d-flex.justify-content-between.align-items-start {
-            position: relative !important;
+        .kanban-card .card-footer-info {
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+            margin-top: auto !important;
+            padding-top: 0.5rem !important;
+            border-top: 1px solid #f1f5f9 !important;
+        }
+        
+        .kanban-card small {
+            font-size: 0.7rem !important;
+            color: #94a3b8 !important;
         }
         
         .kanban-card:hover {
-            transform: translateX(3px) !important;
-            box-shadow: 0 2px 8px rgba(34, 197, 94, 0.15) !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.12) !important;
+            border-left-color: var(--primary-dark) !important;
+        }
+
+        /* Responsive Kanban */
+        @@media (max-width: 1300px) {
+            .kanban-section .row {
+                flex-wrap: nowrap !important;
+                overflow-x: auto !important;
+                justify-content: flex-start !important;
+                padding-bottom: 1rem !important;
+            }
+            .kanban-section .row > div[class*="col-"] {
+                flex: 0 0 280px !important;
+                max-width: 280px !important;
+            }
+            .kanban-column {
+                height: 500px !important;
+            }
+        }
+
+        @@media (max-width: 576px) {
+            .dashboard-header {
+                padding: 0.85rem 1rem;
+            }
+
+            .stat-card {
+                padding: 0.6rem;
+            }
+
+            .stat-number {
+                font-size: 1.25rem;
+            }
+
+            .chart-card {
+                padding: 0.85rem;
+            }
+
+            #statusPieChart,
+            #statusBarChart,
+            #technicianChart,
+            #platformChart {
+                max-height: 220px !important;
+            }
+
+            /* Kanban nhỏ hơn trên điện thoại */
+            .kanban-section .row > div[class*="col-"] {
+                flex: 0 0 240px !important;
+                max-width: 240px !important;
+            }
+            .kanban-column {
+                height: 460px !important;
+            }
+        }
+        
+        /* Bỏ background và border của status badges trong phần technician stats */
+        .technician-card .badge {
+            background: transparent !important;
+            border: none !important;
+            padding: 0 !important;
+            font-weight: 600 !important;
+            color: inherit !important;
         }
     </style>
 End Section
 
-<div class="container-fluid">
+<div class="container-fluid dashboard-container">
     <!-- Dashboard Header -->
     <div class="dashboard-header">
         <div class="row align-items-center">
@@ -384,7 +569,7 @@ End Section
     <!-- Thống kê tổng quan -->
     <div class="row mb-3">
         <div class="col-lg-2 col-md-4 col-sm-6 mb-3">
-            <div class="stat-card total">
+            <div class="stat-card total" data-status="total" role="button" tabindex="0" aria-label="Xem danh sách tổng công việc">
                 <div class="stat-card-header">
                     <div class="stat-icon total">
                         <i class="fas fa-tasks"></i>
@@ -395,7 +580,7 @@ End Section
             </div>
         </div>
         <div class="col-lg-2 col-md-4 col-sm-6 mb-3">
-            <div class="stat-card pending">
+            <div class="stat-card pending" data-status="pending" role="button" tabindex="0" aria-label="Xem danh sách công việc chưa xử lý">
                 <div class="stat-card-header">
                     <div class="stat-icon pending">
                         <i class="fas fa-clock"></i>
@@ -406,7 +591,7 @@ End Section
             </div>
         </div>
         <div class="col-lg-2 col-md-4 col-sm-6 mb-3">
-            <div class="stat-card inprogress">
+            <div class="stat-card inprogress" data-status="inprogress" role="button" tabindex="0" aria-label="Xem danh sách công việc đang xử lý">
                 <div class="stat-card-header">
                     <div class="stat-icon inprogress">
                         <i class="fas fa-spinner"></i>
@@ -417,7 +602,7 @@ End Section
             </div>
         </div>
         <div class="col-lg-2 col-md-4 col-sm-6 mb-3">
-            <div class="stat-card waiting">
+            <div class="stat-card waiting" data-status="waiting" role="button" tabindex="0" aria-label="Xem danh sách công việc chờ phản hồi">
                 <div class="stat-card-header">
                     <div class="stat-icon waiting">
                         <i class="fas fa-hourglass-half"></i>
@@ -428,7 +613,7 @@ End Section
             </div>
         </div>
         <div class="col-lg-2 col-md-4 col-sm-6 mb-3">
-            <div class="stat-card completed">
+            <div class="stat-card completed" data-status="completed" role="button" tabindex="0" aria-label="Xem danh sách công việc đã hoàn thành">
                 <div class="stat-card-header">
                     <div class="stat-icon completed">
                         <i class="fas fa-check-circle"></i>
@@ -439,7 +624,7 @@ End Section
             </div>
         </div>
         <div class="col-lg-2 col-md-4 col-sm-6 mb-3">
-            <div class="stat-card paused">
+            <div class="stat-card paused" data-status="paused" role="button" tabindex="0" aria-label="Xem danh sách công việc quá hạn">
                 <div class="stat-card-header">
                     <div class="stat-icon paused">
                         <i class="fas fa-pause-circle"></i>
@@ -447,6 +632,42 @@ End Section
                     <div class="stat-label">Quá hạn</div>
                 </div>
                 <div class="stat-number paused">@ViewBag.PausedTasks</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal danh sách công việc theo trạng thái (click từ các ô thống kê) -->
+    <div class="modal fade" id="statusTasksModal" tabindex="-1" aria-labelledby="statusTasksModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="statusTasksModalLabel">Danh sách công việc</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table class="table table-sm table-hover align-middle mb-0">
+                            <thead>
+                                <tr>
+                                    <th style="min-width: 360px;">Mô tả</th>
+                                    <th class="d-none d-md-table-cell" style="min-width: 160px;">Khách hàng</th>
+                                    <th class="d-none d-md-table-cell" style="min-width: 160px;">Kỹ thuật</th>
+                                    <th class="d-none d-md-table-cell" style="min-width: 120px;">Ngày tạo</th>
+                                    <th class="d-none d-md-table-cell" style="min-width: 140px;">Trạng thái</th>
+                                    <th style="min-width: 80px;"></th>
+                                </tr>
+                            </thead>
+                            <tbody id="statusTasksModalBody">
+                                <tr>
+                                    <td colspan="6" class="text-center text-muted py-4">Đang tải...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Đóng</button>
+                </div>
             </div>
         </div>
     </div>
@@ -544,29 +765,25 @@ End Section
                                 Dim desc = If(task.Description, "")
                                 Dim shortDesc = ""
                                 If desc IsNot Nothing AndAlso desc.Length > 0 Then
-                                    ' Strip HTML tags để tránh style ảnh hưởng các task khác
+                                    ' Thu ngắn tiêu đề xuống còn 35 ký tự để tránh chiếm không gian
                                     Dim plainText = System.Text.RegularExpressions.Regex.Replace(desc, "<.*?>", "")
-                                    If plainText.Length > 50 Then
-                                        shortDesc = plainText.Substring(0, 50) & "..."
+                                    If plainText.Length > 35 Then
+                                        shortDesc = plainText.Substring(0, 35) & "..."
                                     Else
                                         shortDesc = plainText
                                     End If
                                 End If
                                 
-                                WriteLiteral("<div class=""kanban-card"" data-task-id=""" & task.Id & """ onclick=""if(!event.target.closest('.status-dropdown') && !event.target.closest('.btn-save-task')) { location.href='" & Url.Action("Details", "Tasks", New With {.id = task.Id}) & "'; }"">")
-                                WriteLiteral("<div class=""d-flex justify-content-between align-items-start mb-2"">")
-                                WriteLiteral("<h6 class=""mb-0 flex-grow-1"" style=""color: inherit; font-weight: inherit; text-decoration: none;"">")
+                                WriteLiteral("<div class=""kanban-card"" data-task-id=""" & task.Id & """ onclick=""if(!event.target.closest('.status-dropdown')) { location.href='" & Url.Action("Details", "Tasks", New With {.id = task.Id}) & "'; }"">")
+                                WriteLiteral("<h6 style=""color: inherit; font-weight: inherit; text-decoration: none;"">")
                                 If Not String.IsNullOrEmpty(shortDesc) Then
                                     WriteLiteral(System.Web.HttpUtility.HtmlEncode(shortDesc))
                                 Else
                                     WriteLiteral("<span class=""text-muted"">Không có mô tả</span>")
                                 End If
                                 WriteLiteral("</h6>")
-                                WriteLiteral("<div class=""d-flex gap-1"">")
-                                WriteLiteral("<button type=""button"" class=""btn btn-sm btn-outline-primary btn-save-task"" data-id=""" & task.Id & """ data-saved=""" & task.IsSaved.ToString().ToLower() & """ title=""" & (If(task.IsSaved, "Bỏ lưu", "Lưu câu trả lời")) & """ onclick=""event.stopPropagation();"">")
-                                WriteLiteral("<i class=""fas fa-bookmark " & (If(task.IsSaved, "text-danger", "")) & """></i>")
-                                WriteLiteral("</button>")
-                                WriteLiteral("<select class=""form-select form-select-sm status-dropdown"" style=""width: auto; min-width: 120px;"" onclick=""event.stopPropagation();"" onchange=""updateStatus('" & task.Id & "', this.value)"">")
+                                WriteLiteral("<div class=""status-row"">")
+                                WriteLiteral("<select class=""form-select form-select-sm status-dropdown"" onclick=""event.stopPropagation();"" onchange=""updateStatus('" & task.Id & "', this.value)"">")
                                 WriteLiteral("<option value=""0""" & If(task.Status = TaskStatus.Pending, " selected", "") & ">🟡 Chưa xử lý</option>")
                                 WriteLiteral("<option value=""1""" & If(task.Status = TaskStatus.InProgress, " selected", "") & ">🔵 Đang xử lý</option>")
                                 WriteLiteral("<option value=""2""" & If(task.Status = TaskStatus.Waiting, " selected", "") & ">🟠 Chờ phản hồi</option>")
@@ -574,16 +791,15 @@ End Section
                                 WriteLiteral("<option value=""4""" & If(task.Status = TaskStatus.Paused, " selected", "") & ">🔴 Quá hạn</option>")
                                 WriteLiteral("</select>")
                                 WriteLiteral("</div>")
-                                WriteLiteral("</div>")
                                 WriteLiteral("<p class=""text-muted small mb-2"">")
                                 WriteLiteral("<i class=""fas fa-user-tie me-1""></i>" & task.CustomerName)
                                 If Not String.IsNullOrEmpty(task.SoftwareName) Then
                                     WriteLiteral("<br/><i class=""fas fa-laptop-code me-1""></i>" & task.SoftwareName)
                                 End If
                                 WriteLiteral("</p>")
-                                WriteLiteral("<div class=""d-flex justify-content-between align-items-center"">")
-                                WriteLiteral("<small class=""text-muted""><i class=""fas fa-user me-1""></i>" & task.AssignedToName & "</small>")
-                                WriteLiteral("<small class=""text-muted""><i class=""fas fa-calendar me-1""></i>" & task.CreatedDate.ToString("dd/MM/yyyy") & "</small>")
+                                WriteLiteral("<div class=""card-footer-info"">")
+                                WriteLiteral("<small><i class=""fas fa-user me-1""></i>" & task.AssignedToName & "</small>")
+                                WriteLiteral("<small><i class=""fas fa-calendar me-1""></i>" & task.CreatedDate.ToString("dd/MM/yyyy") & "</small>")
                                 WriteLiteral("</div></div>")
                             Next
                         End If
@@ -606,29 +822,25 @@ End Section
                                 Dim desc = If(task.Description, "")
                                 Dim shortDesc = ""
                                 If desc IsNot Nothing AndAlso desc.Length > 0 Then
-                                    ' Strip HTML tags để tránh style ảnh hưởng các task khác
+                                    ' Thu ngắn tiêu đề xuống còn 35 ký tự để tránh chiếm không gian
                                     Dim plainText = System.Text.RegularExpressions.Regex.Replace(desc, "<.*?>", "")
-                                    If plainText.Length > 50 Then
-                                        shortDesc = plainText.Substring(0, 50) & "..."
+                                    If plainText.Length > 35 Then
+                                        shortDesc = plainText.Substring(0, 35) & "..."
                                     Else
                                         shortDesc = plainText
                                     End If
                                 End If
                                 
-                                WriteLiteral("<div class=""kanban-card"" data-task-id=""" & task.Id & """ onclick=""if(!event.target.closest('.status-dropdown') && !event.target.closest('.btn-save-task')) { location.href='" & Url.Action("Details", "Tasks", New With {.id = task.Id}) & "'; }"">")
-                                WriteLiteral("<div class=""d-flex justify-content-between align-items-start mb-2"">")
-                                WriteLiteral("<h6 class=""mb-0 flex-grow-1"" style=""color: inherit; font-weight: inherit; text-decoration: none;"">")
+                                WriteLiteral("<div class=""kanban-card"" data-task-id=""" & task.Id & """ onclick=""if(!event.target.closest('.status-dropdown')) { location.href='" & Url.Action("Details", "Tasks", New With {.id = task.Id}) & "'; }"">")
+                                WriteLiteral("<h6 style=""color: inherit; font-weight: inherit; text-decoration: none;"">")
                                 If Not String.IsNullOrEmpty(shortDesc) Then
                                     WriteLiteral(System.Web.HttpUtility.HtmlEncode(shortDesc))
                                 Else
                                     WriteLiteral("<span class=""text-muted"">Không có mô tả</span>")
                                 End If
                                 WriteLiteral("</h6>")
-                                WriteLiteral("<div class=""d-flex gap-1"">")
-                                WriteLiteral("<button type=""button"" class=""btn btn-sm btn-outline-primary btn-save-task"" data-id=""" & task.Id & """ data-saved=""" & task.IsSaved.ToString().ToLower() & """ title=""" & (If(task.IsSaved, "Bỏ lưu", "Lưu câu trả lời")) & """ onclick=""event.stopPropagation();"">")
-                                WriteLiteral("<i class=""fas fa-bookmark " & (If(task.IsSaved, "text-danger", "")) & """></i>")
-                                WriteLiteral("</button>")
-                                WriteLiteral("<select class=""form-select form-select-sm status-dropdown"" style=""width: auto; min-width: 120px;"" onclick=""event.stopPropagation();"" onchange=""updateStatus('" & task.Id & "', this.value)"">")
+                                WriteLiteral("<div class=""status-row"">")
+                                WriteLiteral("<select class=""form-select form-select-sm status-dropdown"" onclick=""event.stopPropagation();"" onchange=""updateStatus('" & task.Id & "', this.value)"">")
                                 WriteLiteral("<option value=""0"">🟡 Chưa xử lý</option>")
                                 WriteLiteral("<option value=""1"" selected>🔵 Đang xử lý</option>")
                                 WriteLiteral("<option value=""2"">🟠 Chờ phản hồi</option>")
@@ -636,16 +848,15 @@ End Section
                                 WriteLiteral("<option value=""4"">🔴 Quá hạn</option>")
                                 WriteLiteral("</select>")
                                 WriteLiteral("</div>")
-                                WriteLiteral("</div>")
                                 WriteLiteral("<p class=""text-muted small mb-2"">")
                                 WriteLiteral("<i class=""fas fa-user-tie me-1""></i>" & task.CustomerName)
                                 If Not String.IsNullOrEmpty(task.SoftwareName) Then
                                     WriteLiteral("<br/><i class=""fas fa-laptop-code me-1""></i>" & task.SoftwareName)
                                 End If
                                 WriteLiteral("</p>")
-                                WriteLiteral("<div class=""d-flex justify-content-between align-items-center"">")
-                                WriteLiteral("<small class=""text-muted""><i class=""fas fa-user me-1""></i>" & task.AssignedToName & "</small>")
-                                WriteLiteral("<small class=""text-muted""><i class=""fas fa-calendar me-1""></i>" & task.CreatedDate.ToString("dd/MM/yyyy") & "</small>")
+                                WriteLiteral("<div class=""card-footer-info"">")
+                                WriteLiteral("<small><i class=""fas fa-user me-1""></i>" & task.AssignedToName & "</small>")
+                                WriteLiteral("<small><i class=""fas fa-calendar me-1""></i>" & task.CreatedDate.ToString("dd/MM/yyyy") & "</small>")
                                 WriteLiteral("</div></div>")
                             Next
                         End If
@@ -668,29 +879,25 @@ End Section
                                 Dim desc = If(task.Description, "")
                                 Dim shortDesc = ""
                                 If desc IsNot Nothing AndAlso desc.Length > 0 Then
-                                    ' Strip HTML tags để tránh style ảnh hưởng các task khác
+                                    ' Thu ngắn tiêu đề xuống còn 35 ký tự để tránh chiếm không gian
                                     Dim plainText = System.Text.RegularExpressions.Regex.Replace(desc, "<.*?>", "")
-                                    If plainText.Length > 50 Then
-                                        shortDesc = plainText.Substring(0, 50) & "..."
+                                    If plainText.Length > 35 Then
+                                        shortDesc = plainText.Substring(0, 35) & "..."
                                     Else
                                         shortDesc = plainText
                                     End If
                                 End If
                                 
-                                WriteLiteral("<div class=""kanban-card"" data-task-id=""" & task.Id & """ onclick=""if(!event.target.closest('.status-dropdown') && !event.target.closest('.btn-save-task')) { location.href='" & Url.Action("Details", "Tasks", New With {.id = task.Id}) & "'; }"">")
-                                WriteLiteral("<div class=""d-flex justify-content-between align-items-start mb-2"">")
-                                WriteLiteral("<h6 class=""mb-0 flex-grow-1"" style=""color: inherit; font-weight: inherit; text-decoration: none;"">")
+                                WriteLiteral("<div class=""kanban-card"" data-task-id=""" & task.Id & """ onclick=""if(!event.target.closest('.status-dropdown')) { location.href='" & Url.Action("Details", "Tasks", New With {.id = task.Id}) & "'; }"">")
+                                WriteLiteral("<h6 style=""color: inherit; font-weight: inherit; text-decoration: none;"">")
                                 If Not String.IsNullOrEmpty(shortDesc) Then
                                     WriteLiteral(System.Web.HttpUtility.HtmlEncode(shortDesc))
                                 Else
                                     WriteLiteral("<span class=""text-muted"">Không có mô tả</span>")
                                 End If
                                 WriteLiteral("</h6>")
-                                WriteLiteral("<div class=""d-flex gap-1"">")
-                                WriteLiteral("<button type=""button"" class=""btn btn-sm btn-outline-primary btn-save-task"" data-id=""" & task.Id & """ data-saved=""" & task.IsSaved.ToString().ToLower() & """ title=""" & (If(task.IsSaved, "Bỏ lưu", "Lưu câu trả lời")) & """ onclick=""event.stopPropagation();"">")
-                                WriteLiteral("<i class=""fas fa-bookmark " & (If(task.IsSaved, "text-danger", "")) & """></i>")
-                                WriteLiteral("</button>")
-                                WriteLiteral("<select class=""form-select form-select-sm status-dropdown"" style=""width: auto; min-width: 120px;"" onclick=""event.stopPropagation();"" onchange=""updateStatus('" & task.Id & "', this.value)"">")
+                                WriteLiteral("<div class=""status-row"">")
+                                WriteLiteral("<select class=""form-select form-select-sm status-dropdown"" onclick=""event.stopPropagation();"" onchange=""updateStatus('" & task.Id & "', this.value)"">")
                                 WriteLiteral("<option value=""0"">🟡 Chưa xử lý</option>")
                                 WriteLiteral("<option value=""1"">🔵 Đang xử lý</option>")
                                 WriteLiteral("<option value=""2"" selected>🟠 Chờ phản hồi</option>")
@@ -698,16 +905,15 @@ End Section
                                 WriteLiteral("<option value=""4"">🔴 Quá hạn</option>")
                                 WriteLiteral("</select>")
                                 WriteLiteral("</div>")
-                                WriteLiteral("</div>")
                                 WriteLiteral("<p class=""text-muted small mb-2"">")
                                 WriteLiteral("<i class=""fas fa-user-tie me-1""></i>" & task.CustomerName)
                                 If Not String.IsNullOrEmpty(task.SoftwareName) Then
                                     WriteLiteral("<br/><i class=""fas fa-laptop-code me-1""></i>" & task.SoftwareName)
                                 End If
                                 WriteLiteral("</p>")
-                                WriteLiteral("<div class=""d-flex justify-content-between align-items-center"">")
-                                WriteLiteral("<small class=""text-muted""><i class=""fas fa-user me-1""></i>" & task.AssignedToName & "</small>")
-                                WriteLiteral("<small class=""text-muted""><i class=""fas fa-calendar me-1""></i>" & task.CreatedDate.ToString("dd/MM/yyyy") & "</small>")
+                                WriteLiteral("<div class=""card-footer-info"">")
+                                WriteLiteral("<small><i class=""fas fa-user me-1""></i>" & task.AssignedToName & "</small>")
+                                WriteLiteral("<small><i class=""fas fa-calendar me-1""></i>" & task.CreatedDate.ToString("dd/MM/yyyy") & "</small>")
                                 WriteLiteral("</div></div>")
                             Next
                         End If
@@ -730,29 +936,25 @@ End Section
                                 Dim desc = If(task.Description, "")
                                 Dim shortDesc = ""
                                 If desc IsNot Nothing AndAlso desc.Length > 0 Then
-                                    ' Strip HTML tags để tránh style ảnh hưởng các task khác
+                                    ' Thu ngắn tiêu đề xuống còn 35 ký tự để tránh chiếm không gian
                                     Dim plainText = System.Text.RegularExpressions.Regex.Replace(desc, "<.*?>", "")
-                                    If plainText.Length > 50 Then
-                                        shortDesc = plainText.Substring(0, 50) & "..."
+                                    If plainText.Length > 35 Then
+                                        shortDesc = plainText.Substring(0, 35) & "..."
                                     Else
                                         shortDesc = plainText
                                     End If
                                 End If
                                 
-                                WriteLiteral("<div class=""kanban-card"" data-task-id=""" & task.Id & """ onclick=""if(!event.target.closest('.status-dropdown') && !event.target.closest('.btn-save-task')) { location.href='" & Url.Action("Details", "Tasks", New With {.id = task.Id}) & "'; }"">")
-                                WriteLiteral("<div class=""d-flex justify-content-between align-items-start mb-2"">")
-                                WriteLiteral("<h6 class=""mb-0 flex-grow-1"" style=""color: inherit; font-weight: inherit; text-decoration: none;"">")
+                                WriteLiteral("<div class=""kanban-card"" data-task-id=""" & task.Id & """ onclick=""if(!event.target.closest('.status-dropdown')) { location.href='" & Url.Action("Details", "Tasks", New With {.id = task.Id}) & "'; }"">")
+                                WriteLiteral("<h6 style=""color: inherit; font-weight: inherit; text-decoration: none;"">")
                                 If Not String.IsNullOrEmpty(shortDesc) Then
                                     WriteLiteral(System.Web.HttpUtility.HtmlEncode(shortDesc))
                                 Else
                                     WriteLiteral("<span class=""text-muted"">Không có mô tả</span>")
                                 End If
                                 WriteLiteral("</h6>")
-                                WriteLiteral("<div class=""d-flex gap-1"">")
-                                WriteLiteral("<button type=""button"" class=""btn btn-sm btn-outline-primary btn-save-task"" data-id=""" & task.Id & """ data-saved=""" & task.IsSaved.ToString().ToLower() & """ title=""" & (If(task.IsSaved, "Bỏ lưu", "Lưu câu trả lời")) & """ onclick=""event.stopPropagation();"">")
-                                WriteLiteral("<i class=""fas fa-bookmark " & (If(task.IsSaved, "text-danger", "")) & """></i>")
-                                WriteLiteral("</button>")
-                                WriteLiteral("<select class=""form-select form-select-sm status-dropdown"" style=""width: auto; min-width: 120px;"" onclick=""event.stopPropagation();"" onchange=""updateStatus('" & task.Id & "', this.value)"">")
+                                WriteLiteral("<div class=""status-row"">")
+                                WriteLiteral("<select class=""form-select form-select-sm status-dropdown"" onclick=""event.stopPropagation();"" onchange=""updateStatus('" & task.Id & "', this.value)"">")
                                 WriteLiteral("<option value=""0"">🟡 Chưa xử lý</option>")
                                 WriteLiteral("<option value=""1"">🔵 Đang xử lý</option>")
                                 WriteLiteral("<option value=""2"">🟠 Chờ phản hồi</option>")
@@ -760,16 +962,15 @@ End Section
                                 WriteLiteral("<option value=""4"">🔴 Quá hạn</option>")
                                 WriteLiteral("</select>")
                                 WriteLiteral("</div>")
-                                WriteLiteral("</div>")
                                 WriteLiteral("<p class=""text-muted small mb-2"">")
                                 WriteLiteral("<i class=""fas fa-user-tie me-1""></i>" & task.CustomerName)
                                 If Not String.IsNullOrEmpty(task.SoftwareName) Then
                                     WriteLiteral("<br/><i class=""fas fa-laptop-code me-1""></i>" & task.SoftwareName)
                                 End If
                                 WriteLiteral("</p>")
-                                WriteLiteral("<div class=""d-flex justify-content-between align-items-center"">")
-                                WriteLiteral("<small class=""text-muted""><i class=""fas fa-user me-1""></i>" & task.AssignedToName & "</small>")
-                                WriteLiteral("<small class=""text-muted""><i class=""fas fa-check-circle me-1""></i>")
+                                WriteLiteral("<div class=""card-footer-info"">")
+                                WriteLiteral("<small><i class=""fas fa-user me-1""></i>" & task.AssignedToName & "</small>")
+                                WriteLiteral("<small><i class=""fas fa-check-circle me-1""></i>")
                                 If task.CompletedDate.HasValue Then
                                     WriteLiteral(task.CompletedDate.Value.ToString("dd/MM/yyyy"))
                                 End If
@@ -795,36 +996,31 @@ End Section
                                 Dim desc = If(task.Description, "")
                                 Dim shortDesc = ""
                                 If desc IsNot Nothing AndAlso desc.Length > 0 Then
-                                    ' Strip HTML tags để tránh style ảnh hưởng các task khác
+                                    ' Thu ngắn tiêu đề xuống còn 35 ký tự để tránh chiếm không gian
                                     Dim plainText = System.Text.RegularExpressions.Regex.Replace(desc, "<.*?>", "")
-                                    If plainText.Length > 50 Then
-                                        shortDesc = plainText.Substring(0, 50) & "..."
+                                    If plainText.Length > 35 Then
+                                        shortDesc = plainText.Substring(0, 35) & "..."
                                     Else
                                         shortDesc = plainText
                                     End If
                                 End If
                                 
-                                WriteLiteral("<div class=""kanban-card"" data-task-id=""" & task.Id & """ onclick=""if(!event.target.closest('.status-dropdown') && !event.target.closest('.btn-save-task')) { location.href='" & Url.Action("Details", "Tasks", New With {.id = task.Id}) & "'; }"">")
-                                WriteLiteral("<div class=""d-flex justify-content-between align-items-start mb-2"">")
-                                WriteLiteral("<h6 class=""mb-0 flex-grow-1"" style=""color: inherit; font-weight: inherit; text-decoration: none;"">")
+                                WriteLiteral("<div class=""kanban-card"" data-task-id=""" & task.Id & """ onclick=""if(!event.target.closest('.status-dropdown')) { location.href='" & Url.Action("Details", "Tasks", New With {.id = task.Id}) & "'; }"">")
+                                WriteLiteral("<h6 style=""color: inherit; font-weight: inherit; text-decoration: none;"">")
                                 If Not String.IsNullOrEmpty(shortDesc) Then
                                     WriteLiteral(System.Web.HttpUtility.HtmlEncode(shortDesc))
                                 Else
                                     WriteLiteral("<span class=""text-muted"">Không có mô tả</span>")
                                 End If
                                 WriteLiteral("</h6>")
-                                WriteLiteral("<div class=""d-flex gap-1"">")
-                                WriteLiteral("<button type=""button"" class=""btn btn-sm btn-outline-primary btn-save-task"" data-id=""" & task.Id & """ data-saved=""" & task.IsSaved.ToString().ToLower() & """ title=""" & (If(task.IsSaved, "Bỏ lưu", "Lưu câu trả lời")) & """ onclick=""event.stopPropagation();"">")
-                                WriteLiteral("<i class=""fas fa-bookmark " & (If(task.IsSaved, "text-danger", "")) & """></i>")
-                                WriteLiteral("</button>")
-                                WriteLiteral("<select class=""form-select form-select-sm status-dropdown"" style=""width: auto; min-width: 120px;"" onclick=""event.stopPropagation();"" onchange=""updateStatus('" & task.Id & "', this.value)"">")
+                                WriteLiteral("<div class=""status-row"">")
+                                WriteLiteral("<select class=""form-select form-select-sm status-dropdown"" onclick=""event.stopPropagation();"" onchange=""updateStatus('" & task.Id & "', this.value)"">")
                                 WriteLiteral("<option value=""0"">🟡 Chưa xử lý</option>")
                                 WriteLiteral("<option value=""1"">🔵 Đang xử lý</option>")
                                 WriteLiteral("<option value=""2"">🟠 Chờ phản hồi</option>")
                                 WriteLiteral("<option value=""3"">🟢 Đã hoàn thành</option>")
-                                WriteLiteral("<option value=""4"" selected>🔴 Tạm dừng</option>")
+                                WriteLiteral("<option value=""4"" selected>🔴 Quá hạn</option>")
                                 WriteLiteral("</select>")
-                                WriteLiteral("</div>")
                                 WriteLiteral("</div>")
                                 WriteLiteral("<p class=""text-muted small mb-2"">")
                                 WriteLiteral("<i class=""fas fa-user-tie me-1""></i>" & task.CustomerName)
@@ -832,9 +1028,9 @@ End Section
                                     WriteLiteral("<br/><i class=""fas fa-laptop-code me-1""></i>" & task.SoftwareName)
                                 End If
                                 WriteLiteral("</p>")
-                                WriteLiteral("<div class=""d-flex justify-content-between align-items-center"">")
-                                WriteLiteral("<small class=""text-muted""><i class=""fas fa-user me-1""></i>" & task.AssignedToName & "</small>")
-                                WriteLiteral("<small class=""text-muted""><i class=""fas fa-calendar me-1""></i>" & task.CreatedDate.ToString("dd/MM/yyyy") & "</small>")
+                                WriteLiteral("<div class=""card-footer-info"">")
+                                WriteLiteral("<small><i class=""fas fa-user me-1""></i>" & task.AssignedToName & "</small>")
+                                WriteLiteral("<small><i class=""fas fa-calendar me-1""></i>" & task.CreatedDate.ToString("dd/MM/yyyy") & "</small>")
                                 WriteLiteral("</div></div>")
                             Next
                         End If
@@ -859,6 +1055,124 @@ End Section
         const waitingCount = @ViewBag.WaitingTasks;
         const completedCount = @ViewBag.CompletedTasks;
         const pausedCount = @ViewBag.PausedTasks;
+
+        // Dữ liệu danh sách công việc theo trạng thái (dùng cho modal khi click ô thống kê)
+        const statusTaskData = {
+            total: [],
+            pending: [],
+            inprogress: [],
+            waiting: [],
+            completed: [],
+            paused: []
+        };
+
+        @Code
+            Dim allTasks = If(Model, New List(Of Task)())
+            For Each t In allTasks
+                Dim desc = If(t.Description, "")
+                Dim plainText = System.Text.RegularExpressions.Regex.Replace(desc, "<.*?>", "")
+                If String.IsNullOrWhiteSpace(plainText) Then plainText = "Không có mô tả"
+                If plainText.Length > 120 Then plainText = plainText.Substring(0, 120) & "..."
+
+                Dim jsId = System.Web.HttpUtility.JavaScriptStringEncode(If(t.Id, ""))
+                Dim jsDesc = System.Web.HttpUtility.JavaScriptStringEncode(plainText)
+                Dim jsCustomer = System.Web.HttpUtility.JavaScriptStringEncode(If(t.CustomerName, ""))
+                Dim jsAssigned = System.Web.HttpUtility.JavaScriptStringEncode(If(t.AssignedToName, ""))
+                Dim jsCreated = System.Web.HttpUtility.JavaScriptStringEncode(t.CreatedDate.ToString("dd/MM/yyyy"))
+                Dim jsCreatedSort = System.Web.HttpUtility.JavaScriptStringEncode(t.CreatedDate.ToString("yyyy-MM-ddTHH:mm:ss"))
+                Dim detailsUrl = System.Web.HttpUtility.JavaScriptStringEncode(Url.Action("Details", "Tasks", New With {.id = t.Id}))
+
+                WriteLiteral("statusTaskData.total.push({ id: '" & jsId & "', desc: '" & jsDesc & "', customer: '" & jsCustomer & "', assigned: '" & jsAssigned & "', created: '" & jsCreated & "', createdSort: '" & jsCreatedSort & "', status: " & CInt(t.Status) & ", url: '" & detailsUrl & "' });" & vbCrLf)
+
+                Select Case t.Status
+                    Case TaskStatus.Pending
+                        WriteLiteral("statusTaskData.pending.push({ id: '" & jsId & "', desc: '" & jsDesc & "', customer: '" & jsCustomer & "', assigned: '" & jsAssigned & "', created: '" & jsCreated & "', createdSort: '" & jsCreatedSort & "', status: " & CInt(t.Status) & ", url: '" & detailsUrl & "' });" & vbCrLf)
+                    Case TaskStatus.InProgress
+                        WriteLiteral("statusTaskData.inprogress.push({ id: '" & jsId & "', desc: '" & jsDesc & "', customer: '" & jsCustomer & "', assigned: '" & jsAssigned & "', created: '" & jsCreated & "', createdSort: '" & jsCreatedSort & "', status: " & CInt(t.Status) & ", url: '" & detailsUrl & "' });" & vbCrLf)
+                    Case TaskStatus.Waiting
+                        WriteLiteral("statusTaskData.waiting.push({ id: '" & jsId & "', desc: '" & jsDesc & "', customer: '" & jsCustomer & "', assigned: '" & jsAssigned & "', created: '" & jsCreated & "', createdSort: '" & jsCreatedSort & "', status: " & CInt(t.Status) & ", url: '" & detailsUrl & "' });" & vbCrLf)
+                    Case TaskStatus.Completed
+                        WriteLiteral("statusTaskData.completed.push({ id: '" & jsId & "', desc: '" & jsDesc & "', customer: '" & jsCustomer & "', assigned: '" & jsAssigned & "', created: '" & jsCreated & "', createdSort: '" & jsCreatedSort & "', status: " & CInt(t.Status) & ", url: '" & detailsUrl & "' });" & vbCrLf)
+                    Case TaskStatus.Paused
+                        WriteLiteral("statusTaskData.paused.push({ id: '" & jsId & "', desc: '" & jsDesc & "', customer: '" & jsCustomer & "', assigned: '" & jsAssigned & "', created: '" & jsCreated & "', createdSort: '" & jsCreatedSort & "', status: " & CInt(t.Status) & ", url: '" & detailsUrl & "' });" & vbCrLf)
+                End Select
+            Next
+        End Code
+
+        const statusMeta = {
+            total: { title: 'Tổng công việc' },
+            pending: { title: 'Công việc chưa xử lý', label: '🟡 Chưa xử lý' },
+            inprogress: { title: 'Công việc đang xử lý', label: '🔵 Đang xử lý' },
+            waiting: { title: 'Công việc chờ phản hồi', label: '🟠 Chờ phản hồi' },
+            completed: { title: 'Công việc đã hoàn thành', label: '🟢 Đã hoàn thành' },
+            paused: { title: 'Công việc quá hạn', label: '🔴 Quá hạn' }
+        };
+
+        function statusBadgeHtml(statusInt) {
+            switch (statusInt) {
+                case 0: return `<span class="status-pill"><span class="status-dot dot-pending"></span>Chưa xử lý</span>`;
+                case 1: return `<span class="status-pill"><span class="status-dot dot-inprogress"></span>Đang xử lý</span>`;
+                case 2: return `<span class="status-pill"><span class="status-dot dot-waiting"></span>Chờ phản hồi</span>`;
+                case 3: return `<span class="status-pill"><span class="status-dot dot-completed"></span>Đã hoàn thành</span>`;
+                case 4: return `<span class="status-pill"><span class="status-dot dot-paused"></span>Quá hạn</span>`;
+                default: return `<span class="status-pill">-</span>`;
+            }
+        }
+
+        function openStatusTasksModal(statusKey) {
+            const meta = statusMeta[statusKey] || { title: 'Danh sách công việc' };
+            const modalTitle = document.getElementById('statusTasksModalLabel');
+            const tbody = document.getElementById('statusTasksModalBody');
+
+            modalTitle.textContent = meta.title;
+            const list = (statusTaskData[statusKey] || []).slice().sort((a, b) => (b.createdSort || '').localeCompare(a.createdSort || ''));
+
+            if (!list.length) {
+                tbody.innerHTML = `<tr><td colspan="6" class="text-center text-muted py-4">Không có công việc</td></tr>`;
+            } else {
+                tbody.innerHTML = list.map(t => {
+                    const safeCustomer = (t.customer || '').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                    const safeAssigned = (t.assigned || '').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                    const safeDesc = (t.desc || '').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                    const safeCreated = (t.created || '').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                    return `
+                        <tr>
+                            <td>
+                                <div class="task-desc-clamp" title="${safeDesc}">${safeDesc}</div>
+                                <div class="text-muted small mt-1 d-md-none">
+                                    ${safeCustomer ? ('Khách: ' + safeCustomer) : ''}${safeCustomer && safeAssigned ? ' • ' : ''}${safeAssigned ? ('KT: ' + safeAssigned) : ''}${(safeCustomer || safeAssigned) && safeCreated ? ' • ' : ''}${safeCreated ? ('Ngày: ' + safeCreated) : ''}
+                                </div>
+                            </td>
+                            <td class="d-none d-md-table-cell">${safeCustomer}</td>
+                            <td class="d-none d-md-table-cell">${safeAssigned}</td>
+                            <td class="d-none d-md-table-cell">${safeCreated}</td>
+                            <td class="d-none d-md-table-cell">${statusBadgeHtml(t.status)}</td>
+                            <td class="text-end">
+                                <a class="btn btn-outline-primary btn-sm" href="${t.url}">Xem</a>
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
+            }
+
+            const modalEl = document.getElementById('statusTasksModal');
+            const modal = bootstrap.Modal.getOrCreateInstance(modalEl);
+            modal.show();
+        }
+
+        // Click + Enter/Space trên các ô thống kê
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.stat-card[data-status]').forEach(card => {
+                const handler = () => openStatusTasksModal(card.getAttribute('data-status'));
+                card.addEventListener('click', handler);
+                card.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        handler();
+                    }
+                });
+            });
+        });
 
         // Biểu đồ tròn (Pie Chart)
         const pieCtx = document.getElementById('statusPieChart').getContext('2d');
@@ -1159,34 +1473,6 @@ End Section
             });
         }
 
-        $(document).on('click', '.btn-save-task', function(e) {
-            e.stopPropagation();
-            var btn = $(this);
-            var id = btn.data('id');
-            var currentSaved = btn.data('saved');
-            var newSaved = !currentSaved;
-            
-            $.ajax({
-                url: '@Url.Action("ToggleSaved", "Tasks")',
-                type: 'POST',
-                data: { id: id, isSaved: newSaved },
-                success: function(response) {
-                    if (response.success) {
-                        btn.data('saved', newSaved);
-                        var icon = btn.find('i');
-                        if (newSaved) {
-                            icon.addClass('text-danger');
-                            btn.attr('title', 'Bỏ lưu');
-                        } else {
-                            icon.removeClass('text-danger');
-                            btn.attr('title', 'Lưu câu trả lời');
-                        }
-                    } else {
-                        alert('Có lỗi xảy ra khi thực hiện thao tác.');
-                    }
-                }
-            });
-        });
 
         // Hiển thị danh sách công việc của kỹ thuật viên
         function showTechnicianTasks(technicianId, technicianName) {
@@ -1257,9 +1543,6 @@ End Section
                             <span class="badge ${getStatusBadgeClass(task.status)} align-self-start">${statusText}</span>
                         </div>
                         <div class="d-flex justify-content-end align-items-center gap-2 pt-2 border-top" style="border-color: #f1f5f9;">
-                            <button type="button" class="btn btn-sm btn-outline-primary btn-save-task" data-id="${task.id}" data-saved="${task.isSaved}" title="${task.isSaved ? 'Bỏ lưu' : 'Lưu câu trả lời'}">
-                                <i class="fas fa-bookmark ${task.isSaved ? 'text-danger' : ''}"></i>
-                            </button>
                             <select class="form-select form-select-sm status-select" style="width: auto; min-width: 140px;" onchange="updateTaskStatus('${task.id}', this.value)">
                                 <option value="0" ${task.status == 0 ? 'selected' : ''}>🟡 Chưa xử lý</option>
                                 <option value="1" ${task.status == 1 ? 'selected' : ''}>🔵 Đang xử lý</option>

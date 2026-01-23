@@ -445,7 +445,7 @@ End Code
                                 <div class="row g-1">
                                     @For Each img In Model.Images
                                         @<div class="col-3">
-                                            <img src="@img" class="img-thumbnail image-zoom" style="max-height: 60px; width: 100%; object-fit: cover; padding: 2px; cursor: pointer;" data-image-src="@img" />
+                                            <img src="@Url.Action("Preview", "File", New With {.filePath = img})" class="img-thumbnail image-zoom" style="max-height: 60px; width: 100%; object-fit: cover; padding: 2px; cursor: pointer;" data-image-src="@Url.Action("Preview", "File", New With {.filePath = img})" />
                                         </div>
                                     Next
                                 </div>
@@ -488,8 +488,8 @@ End Code
                                 <label class="form-label" style="font-size: 0.7rem;">File hiện tại</label>
                                 <div class="d-flex flex-wrap gap-1">
                                     @For Each att In Model.Attachments
-                                        @<a href="@att" target="_blank" class="badge bg-secondary text-decoration-none" style="font-size: 0.7rem;">
-                                            <i class="fas fa-file me-1"></i>@System.IO.Path.GetFileName(att)
+                                        @<a href="@Url.Action("Download", "File", New With {.filePath = att})" target="_blank" class="badge bg-secondary text-decoration-none" style="font-size: 0.7rem;">
+                                            <i class="fas fa-file me-1"></i>@System.IO.Path.GetFileName(att.Split("?"c)(0))
                                         </a>
                                     Next
                                 </div>

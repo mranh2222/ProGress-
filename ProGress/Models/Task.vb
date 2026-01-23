@@ -23,8 +23,10 @@ Public Class Task
     Public Property Solution As String
     Public Property ResponseToCustomer As String
     Public Property IsSaved As Boolean ' Đánh dấu câu trả lời đã lưu
-    Public Property Attachments As List(Of String) ' URLs của file đính kèm
-    Public Property Images As List(Of String) ' URLs của hình ảnh
+    Public Property Attachments As List(Of String) ' URLs của file đính kèm (câu hỏi)
+    Public Property Images As List(Of String) ' URLs của hình ảnh (câu hỏi)
+    Public Property ResponseAttachments As List(Of String) ' URLs của file đính kèm (phản hồi)
+    Public Property ResponseImages As List(Of String) ' URLs của hình ảnh (phản hồi)
     Public Property History As List(Of TaskHistory)
     
     Public Sub New()
@@ -34,6 +36,8 @@ Public Class Task
         SupportPlatform = SupportPlatform.Zalo
         Attachments = New List(Of String)
         Images = New List(Of String)
+        ResponseAttachments = New List(Of String)
+        ResponseImages = New List(Of String)
         History = New List(Of TaskHistory)
     End Sub
 End Class

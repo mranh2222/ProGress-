@@ -114,6 +114,8 @@ Public Class SqlDataService
             For Each t In list
                 t.Attachments = Await GetTaskLinks(t.Id, "TaskAttachments")
                 t.Images = Await GetTaskLinks(t.Id, "TaskImages")
+                t.ResponseAttachments = Await GetTaskLinks(t.Id, "TaskResponseAttachments")
+                t.ResponseImages = Await GetTaskLinks(t.Id, "TaskResponseImages")
             Next
         End Using
         Return list
@@ -145,6 +147,8 @@ Public Class SqlDataService
             For Each t In list
                 t.Attachments = Await GetTaskLinks(t.Id, "TaskAttachments")
                 t.Images = Await GetTaskLinks(t.Id, "TaskImages")
+                t.ResponseAttachments = Await GetTaskLinks(t.Id, "TaskResponseAttachments")
+                t.ResponseImages = Await GetTaskLinks(t.Id, "TaskResponseImages")
             Next
         End Using
         Return list
@@ -181,6 +185,8 @@ Public Class SqlDataService
                     
                     taskItem.Attachments = Await GetTaskLinks(taskItem.Id, "TaskAttachments")
                     taskItem.Images = Await GetTaskLinks(taskItem.Id, "TaskImages")
+                    taskItem.ResponseAttachments = Await GetTaskLinks(taskItem.Id, "TaskResponseAttachments")
+                    taskItem.ResponseImages = Await GetTaskLinks(taskItem.Id, "TaskResponseImages")
                     taskItem.History = Await GetTaskHistory(taskItem.Id)
                     
                     Return taskItem
@@ -206,6 +212,8 @@ Public Class SqlDataService
             
             Await SaveTaskLinks(task.Id, task.Attachments, "TaskAttachments")
             Await SaveTaskLinks(task.Id, task.Images, "TaskImages")
+            Await SaveTaskLinks(task.Id, task.ResponseAttachments, "TaskResponseAttachments")
+            Await SaveTaskLinks(task.Id, task.ResponseImages, "TaskResponseImages")
             
             Return rows > 0
         End Using
@@ -227,6 +235,8 @@ Public Class SqlDataService
             
             Await SaveTaskLinks(task.Id, task.Attachments, "TaskAttachments")
             Await SaveTaskLinks(task.Id, task.Images, "TaskImages")
+            Await SaveTaskLinks(task.Id, task.ResponseAttachments, "TaskResponseAttachments")
+            Await SaveTaskLinks(task.Id, task.ResponseImages, "TaskResponseImages")
             
             Return rows > 0
         End Using

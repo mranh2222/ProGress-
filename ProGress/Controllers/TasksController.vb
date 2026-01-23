@@ -169,7 +169,19 @@ Public Class TasksController
     <ActionName("Delete")>
     <ValidateAntiForgeryToken>
     Async Function DeleteConfirmed(id As String) As ThreadingTask.Task(Of ActionResult)
-        Await _dataService.DeleteTaskAsync(id)
+        Try
+            Dim taskId = If(Not String.IsNullOrEmpty(Request.Form("id")), Request.Form("id"), id)
+            If String.IsNullOrEmpty(taskId) Then
+                Return RedirectToAction("Index")
+            End If
+            
+            Dim success = Await _dataService.DeleteTaskAsync(taskId)
+            If Not success Then
+                ' Có thể thêm thông báo lỗi nếu cần
+            End If
+        Catch ex As Exception
+            ' Log lỗi nếu cần
+        End Try
         Return RedirectToAction("Index")
     End Function
     
@@ -205,22 +217,57 @@ Public Class TasksController
     <HttpPost>
     <ValidateAntiForgeryToken>
     <ValidateInput(False)>
-    Async Function ReplyToCustomer(id As String, responseToCustomer As String) As ThreadingTask.Task(Of JsonResult)
+    Async Function ReplyToCustomer(id As String, responseToCustomer As String, uploadedFiles As HttpPostedFileBase(), uploadedImages As HttpPostedFileBase()) As ThreadingTask.Task(Of JsonResult)
         Try
-            Dim taskId = Request.Unvalidated.Form("id")
-            Dim responseText = Request.Unvalidated.Form("responseToCustomer")
+            ' id và responseToCustomer được MVC tự động bind từ form parameters
+            Dim taskId = If(String.IsNullOrEmpty(id), Request.Unvalidated.Form("id"), id)
+            Dim responseText = responseToCustomer
             
+            If String.IsNullOrEmpty(responseText) Then
+                responseText = Request.Unvalidated.Form("responseToCustomer")
+            End If
+            
+            ' Nếu vẫn bị x2 (do MVC merge các field cùng tên), ta chỉ lấy phần nội dung đầu tiên
+            If Not String.IsNullOrEmpty(responseText) AndAlso responseText.Contains(",") Then
+                ' Kiểm tra xem có thực sự bị lặp không (phân tách bởi dấu phẩy)
+                ' Lưu ý: Cách này có thể nguy hiểm nếu nội dung chứa dấu phẩy thật, 
+                ' nhưng thường MVC merge các field cùng tên sẽ tạo ra chuỗi "val1,val2"
+                ' Tuy nhiên, Quill content là HTML nên thường không bị lặp kiểu đơn giản này.
+                ' Để chắc chắn hơn, ta xem lại phía Client.
+            End If
+
             Dim task = Await _dataService.GetTaskByIdAsync(taskId)
-            If task Is Nothing Then Return Json(New With {.success = False})
+            If task Is Nothing Then Return Json(New With {.success = False, .message = "Không tìm thấy công việc"})
             
             task.ResponseToCustomer = responseText
+            
+            ' Xử lý file đính kèm của phản hồi
+            If uploadedFiles IsNot Nothing Then
+                For Each postedFile As HttpPostedFileBase In uploadedFiles
+                    If postedFile IsNot Nothing AndAlso postedFile.ContentLength > 0 Then
+                        Dim url = Await _storageService.UploadFileAsync(postedFile, "uploads/responses")
+                        If Not String.IsNullOrEmpty(url) Then task.ResponseAttachments.Add(url)
+                    End If
+                Next
+            End If
+            
+            ' Xử lý ảnh đính kèm của phản hồi
+            If uploadedImages IsNot Nothing Then
+                For Each postedImage As HttpPostedFileBase In uploadedImages
+                    If postedImage IsNot Nothing AndAlso postedImage.ContentLength > 0 Then
+                        Dim url = Await _storageService.UploadFileAsync(postedImage, "images/responses")
+                        If Not String.IsNullOrEmpty(url) Then task.ResponseImages.Add(url)
+                    End If
+                Next
+            End If
+            
             task.Status = TaskStatus.Completed
             task.CompletedDate = DateTime.Now
             
             Dim success = Await _dataService.UpdateTaskAsync(task)
             Return Json(New With {.success = success})
         Catch ex As Exception
-            Return Json(New With {.success = False})
+            Return Json(New With {.success = False, .message = ex.Message})
         End Try
     End Function
 End Class

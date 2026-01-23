@@ -28,7 +28,7 @@ Public Module RouteConfig
         routes.MapRoute(
             name:="Default",
             url:="{controller}/{action}/{id}",
-            defaults:=New With {.controller = "Dashboard", .action = "Index", .id = UrlParameter.Optional}
+            defaults:=New With {.controller = "Account", .action = "Login", .id = UrlParameter.Optional}
         )
     End Sub
 End Module

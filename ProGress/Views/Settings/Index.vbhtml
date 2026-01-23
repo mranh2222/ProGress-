@@ -10,42 +10,57 @@ End Code
     </div>
 
     <div class="row g-3">
-        <!-- Cấu hình Firebase -->
+        <!-- Cấu hình Database -->
         <div class="col-lg-8">
             <div class="card shadow-sm mb-3">
                 <div class="card-header-custom">
                     <h6 class="mb-0" style="font-size: 0.875rem; font-weight: 600; color: #1f2937;">
-                        <i class="fas fa-database me-2" style="color: #f59e0b;"></i>Cấu hình Firebase
+                        <i class="fas fa-database me-2" style="color: #f59e0b;"></i>Cấu hình Database
                     </h6>
                 </div>
                 <div class="card-body p-3">
                     <div class="mb-3">
                         <label class="form-label small mb-1" style="font-weight: 600; color: #374151;">
-                            Firebase Realtime Database URL
+                            Database Server
                         </label>
                         <div class="input-group">
-                            <input type="text" class="form-control form-control-sm" value="@ViewBag.FirebaseUrl" readonly style="background: #f9fafb; font-family: monospace; font-size: 0.8rem;">
-                            <button class="btn btn-outline-secondary btn-sm" type="button" onclick="copyToClipboard('@ViewBag.FirebaseUrl')" title="Sao chép">
+                            <input type="text" class="form-control form-control-sm" value="@ViewBag.ServerName" readonly style="background: #f9fafb; font-family: monospace; font-size: 0.8rem;">
+                            <button class="btn btn-outline-secondary btn-sm" type="button" onclick="copyToClipboard('@ViewBag.ServerName')" title="Sao chép">
                                 <i class="fas fa-copy"></i>
                             </button>
                         </div>
                         <small class="form-text text-muted" style="font-size: 0.7rem;">
-                            <i class="fas fa-info-circle me-1"></i>URL của Firebase Realtime Database
+                            <i class="fas fa-info-circle me-1"></i>Tên máy chủ SQL Server
+                        </small>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label small mb-1" style="font-weight: 600; color: #374151;">
+                            Database Name
+                        </label>
+                        <div class="input-group">
+                            <input type="text" class="form-control form-control-sm" value="@ViewBag.DatabaseName" readonly style="background: #f9fafb; font-family: monospace; font-size: 0.8rem;">
+                            <button class="btn btn-outline-secondary btn-sm" type="button" onclick="copyToClipboard('@ViewBag.DatabaseName')" title="Sao chép">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                        <small class="form-text text-muted" style="font-size: 0.7rem;">
+                            <i class="fas fa-info-circle me-1"></i>Tên database đang sử dụng
                         </small>
                     </div>
                     
                     <div class="mb-0">
                         <label class="form-label small mb-1" style="font-weight: 600; color: #374151;">
-                            Firebase Storage Bucket
+                            Connection String
                         </label>
                         <div class="input-group">
-                            <input type="text" class="form-control form-control-sm" value="@ViewBag.FirebaseStorageBucket" readonly style="background: #f9fafb; font-family: monospace; font-size: 0.8rem;">
-                            <button class="btn btn-outline-secondary btn-sm" type="button" onclick="copyToClipboard('@ViewBag.FirebaseStorageBucket')" title="Sao chép">
+                            <input type="text" class="form-control form-control-sm" value="@ViewBag.ConnectionString" readonly style="background: #f9fafb; font-family: monospace; font-size: 0.7rem;">
+                            <button class="btn btn-outline-secondary btn-sm" type="button" onclick="copyToClipboard('@ViewBag.ConnectionString')" title="Sao chép">
                                 <i class="fas fa-copy"></i>
                             </button>
                         </div>
                         <small class="form-text text-muted" style="font-size: 0.7rem;">
-                            <i class="fas fa-info-circle me-1"></i>Tên bucket của Firebase Storage
+                            <i class="fas fa-info-circle me-1"></i>Connection string (đã ẩn mật khẩu vì lý do bảo mật)
                         </small>
                     </div>
                 </div>
@@ -74,7 +89,7 @@ End Code
                         </div>
                         <div class="col-md-6">
                             <label class="form-label small mb-1" style="font-weight: 600; color: #374151;">Database</label>
-                            <p class="mb-0 small">Firebase Realtime Database</p>
+                            <p class="mb-0 small">Microsoft SQL Server</p>
                         </div>
                     </div>
                 </div>
@@ -92,10 +107,10 @@ End Code
                 <div class="card-body p-3">
                     <div class="mb-3">
                         <h6 class="small mb-2" style="font-weight: 600; color: #374151;">
-                            <i class="fas fa-cog me-1"></i>Cấu hình Firebase
+                            <i class="fas fa-cog me-1"></i>Cấu hình Database
                         </h6>
                         <p class="small text-muted mb-0">
-                            Để thay đổi cấu hình Firebase, vui lòng chỉnh sửa file <code style="font-size: 0.7rem;">Web.config</code> trong thư mục gốc của dự án.
+                            Để thay đổi cấu hình database, vui lòng chỉnh sửa file <code style="font-size: 0.7rem;">Web.config</code> hoặc <code style="font-size: 0.7rem;">Web.Release.config</code> trong thư mục gốc của dự án.
                         </p>
                     </div>
                     <div class="mb-0">
@@ -103,7 +118,7 @@ End Code
                             <i class="fas fa-shield-alt me-1"></i>Bảo mật
                         </h6>
                         <p class="small text-muted mb-0">
-                            Không chia sẻ thông tin cấu hình Firebase với người không có quyền truy cập.
+                            Không chia sẻ thông tin connection string và mật khẩu database với người không có quyền truy cập.
                         </p>
                     </div>
                 </div>
@@ -117,11 +132,11 @@ End Code
                 </div>
                 <div class="card-body p-3">
                     <div class="d-grid gap-2">
-                        <a href="https://firebase.google.com/docs/database" target="_blank" class="btn btn-outline-primary btn-sm">
-                            <i class="fas fa-external-link-alt me-2"></i>Firebase Documentation
+                        <a href="https://docs.microsoft.com/en-us/sql/sql-server/" target="_blank" class="btn btn-outline-primary btn-sm">
+                            <i class="fas fa-external-link-alt me-2"></i>SQL Server Documentation
                         </a>
-                        <a href="https://console.firebase.google.com" target="_blank" class="btn btn-outline-secondary btn-sm">
-                            <i class="fas fa-external-link-alt me-2"></i>Firebase Console
+                        <a href="https://www.microsoft.com/en-us/sql-server/sql-server-downloads" target="_blank" class="btn btn-outline-secondary btn-sm">
+                            <i class="fas fa-external-link-alt me-2"></i>SQL Server Downloads
                         </a>
                     </div>
                 </div>

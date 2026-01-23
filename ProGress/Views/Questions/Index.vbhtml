@@ -70,8 +70,10 @@ End Code
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="content-truncate" title="@taskItem.Solution">
-                                            @If Not String.IsNullOrEmpty(taskItem.Solution) Then
+                                        <div class="content-truncate" title="@(If(Not String.IsNullOrEmpty(taskItem.ResponseToCustomer), taskItem.ResponseToCustomer, taskItem.Solution))">
+                                            @If Not String.IsNullOrEmpty(taskItem.ResponseToCustomer) Then
+                                                @Html.Raw(taskItem.ResponseToCustomer)
+                                            ElseIf Not String.IsNullOrEmpty(taskItem.Solution) Then
                                                 @Html.Raw(taskItem.Solution)
                                             Else
                                                 @<span class="text-muted italic small">Chưa có giải pháp</span>
@@ -80,10 +82,10 @@ End Code
                                     </td>
                                     <td class="text-center">
                                         <div class="btn-group btn-group-sm">
-                                            <a href="@Url.Action("Details", "Tasks", New With {.id = taskItem.Id})" class="btn btn-outline-primary" title="Xem chi tiết">
+                                            <a href="@Url.Action("Details", "Tasks", New With {.id = taskItem.Id})" class="btn btn-outline-dark btn-action-dark" title="Xem chi tiết">
                                                 <i class="fas fa-eye"></i>
                                             </a>
-                                            <button type="button" class="btn btn-outline-danger btn-unsave" data-id="@taskItem.Id" title="Bỏ lưu">
+                                            <button type="button" class="btn btn-outline-dark btn-action-dark btn-unsave" data-id="@taskItem.Id" title="Bỏ lưu">
                                                 <i class="fas fa-bookmark"></i>
                                             </button>
                                         </div>
@@ -138,14 +140,7 @@ End Code
         line-height: 1.5;
     }
 
-    .btn-unsave {
-        color: #dc3545;
-    }
-    
-    .btn-unsave:hover {
-        background-color: #dc3545;
-        color: white;
-    }
+    /* nút action dùng style chung .btn-action-dark (định nghĩa ở _Layout) */
 </style>
 
 @Section scripts

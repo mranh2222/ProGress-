@@ -27,14 +27,15 @@ End Code
         font-size: 0.8rem;
         width: 100%;
         table-layout: auto;
-        min-width: 1400px;
+        min-width: 1200px;
     }
     
     .table thead th {
         font-size: 0.75rem;
         font-weight: 600;
         padding: 0.5rem 0.4rem;
-        white-space: nowrap;
+        white-space: normal;
+        line-height: 1.3;
         background-color: var(--primary-color) !important;
         color: white !important;
         border: 1px solid var(--primary-darker);
@@ -42,10 +43,9 @@ End Code
         text-align: center;
     }
     
-    .table thead th:nth-child(10),
-    .table thead th:nth-child(11) {
-        white-space: normal;
-        line-height: 1.3;
+    /* Cột mô tả header căn trái */
+    .table thead th:nth-child(4) {
+        text-align: left;
     }
     
     .table tbody td {
@@ -54,44 +54,54 @@ End Code
         vertical-align: middle;
         word-wrap: break-word;
         word-break: break-word;
-        max-width: 200px;
     }
     
+    /* Thu nhỏ các cột cho vừa header */
     .table tbody td:first-child {
-        max-width: 100px;
+        max-width: 90px;
+        text-align: center;
     }
     
-    .table tbody td:nth-child(2),
-    .table tbody td:nth-child(10),
-    .table tbody td:nth-child(11) {
+    .table tbody td:nth-child(2) {
+        max-width: 110px;
+        text-align: center;
+    }
+    
+    .table tbody td:nth-child(3) {
+        max-width: 130px;
+        text-align: center;
+    }
+    
+    /* Cột mô tả rộng ra */
+    .table tbody td:nth-child(4) {
+        max-width: 300px;
+        min-width: 250px;
+        text-align: left;
+    }
+    
+    /* Các cột còn lại thu nhỏ và căn giữa */
+    .table tbody td:nth-child(5) {
+        max-width: 110px;
+        text-align: center;
+    }
+    
+    .table tbody td:nth-child(6) {
         max-width: 120px;
         white-space: nowrap;
+        text-align: center;
     }
     
-    .table tbody td:nth-child(3),
-    .table tbody td:nth-child(4),
-    .table tbody td:nth-child(6),
+    .table tbody td:nth-child(7),
     .table tbody td:nth-child(8) {
-        max-width: 150px;
-    }
-    
-    .table tbody td:nth-child(5) {
-        max-width: 180px;
-    }
-    
-    .table tbody td:nth-child(7) {
-        max-width: 250px;
-        min-width: 200px;
-    }
-    
-    .table tbody td:nth-child(9) {
-        max-width: 140px;
+        max-width: 100px;
         white-space: nowrap;
+        text-align: center;
     }
     
     .table tbody td:last-child {
-        max-width: 120px;
+        max-width: 100px;
         white-space: nowrap;
+        text-align: center;
     }
     
     .table .badge {
@@ -113,6 +123,8 @@ End Code
     .table .btn-group .btn i {
         font-size: 0.7rem;
     }
+    
+    /* NOTE: nút Xóa dùng thuộc tính form="deleteForm-..." nên không còn form nằm trong btn-group */
     
     .table-hover tbody tr:hover {
         background-color: rgba(37, 99, 235, 0.05);
@@ -155,12 +167,9 @@ End Code
                     <table class="table table-hover table-bordered table-sm">
                         <thead class="table-light">
                             <tr>
-                                <th>Tag</th>
-                                <th>Ngày nhận file</th>
-                                <th>Nền tảng hỗ trợ</th>
-                                <th>Sale quản lý</th>
-                                <th>Khách hàng</th>
-                                <th>Phần mềm sử dụng</th>
+                                <th style="white-space: normal; line-height: 1.3;">Tag<br />Ngày nhận file</th>
+                                <th style="white-space: normal; line-height: 1.3;">Nền tảng hỗ trợ<br />Sale quản lý</th>
+                                <th style="white-space: normal; line-height: 1.3;">Khách hàng<br />Phần mềm sử dụng</th>
                                 <th>Mô tả lỗi / nội dung hỗ trợ</th>
                                 <th>Kỹ thuật phụ trách</th>
                                 <th>Tình trạng</th>
@@ -172,56 +181,64 @@ End Code
                         <tbody>
                             @For Each item In taskList
                                 @<tr>
-                                    <td>
-                                        @Code
-                                            If Not String.IsNullOrEmpty(item.Tag) Then
-                                                WriteLiteral("<span class=""badge bg-secondary"">" & item.Tag & "</span>")
-                                            Else
-                                                WriteLiteral("<span class=""text-muted"">-</span>")
-                                            End If
-                                        End Code
-                                    </td>
-                                    <td>
-                                        @Code
-                                            If item.FileReceivedDate.HasValue Then
-                                                WriteLiteral(item.FileReceivedDate.Value.ToString("dd/MM/yyyy"))
-                                            Else
-                                                WriteLiteral("<span class=""text-muted"">-</span>")
-                                            End If
-                                        End Code
-                                    </td>
-                                    <td>
-                                        @Code
-                                            Select Case item.SupportPlatform
-                                                Case SupportPlatform.Zalo
-                                                    WriteLiteral("Zalo")
-                                                Case SupportPlatform.MemberSupport
-                                                    WriteLiteral("Member Support")
-                                                Case SupportPlatform.CustomerContactSale
-                                                    WriteLiteral("Khách liên hệ Sale")
-                                                Case Else
+                                    <td style="white-space: normal;">
+                                        <div style="margin-bottom: 0.25rem;">
+                                            @Code
+                                                If Not String.IsNullOrEmpty(item.Tag) Then
+                                                    WriteLiteral("<span class=""badge bg-secondary"">" & item.Tag & "</span>")
+                                                Else
                                                     WriteLiteral("<span class=""text-muted"">-</span>")
-                                            End Select
-                                        End Code
+                                                End If
+                                            End Code
+                                        </div>
+                                        <div style="font-size: 0.75rem; color: #6b7280;">
+                                            @Code
+                                                If item.FileReceivedDate.HasValue Then
+                                                    WriteLiteral(item.FileReceivedDate.Value.ToString("dd/MM/yyyy"))
+                                                Else
+                                                    WriteLiteral("<span class=""text-muted"">-</span>")
+                                                End If
+                                            End Code
+                                        </div>
                                     </td>
-                                    <td>
-                                        @Code
-                                            If Not String.IsNullOrEmpty(item.SaleManagerName) Then
-                                                WriteLiteral(item.SaleManagerName)
-                                            Else
-                                                WriteLiteral("<span class=""text-muted"">-</span>")
-                                            End If
-                                        End Code
+                                    <td style="white-space: normal;">
+                                        <div style="margin-bottom: 0.25rem;">
+                                            @Code
+                                                Select Case item.SupportPlatform
+                                                    Case SupportPlatform.Zalo
+                                                        WriteLiteral("Zalo")
+                                                    Case SupportPlatform.MemberSupport
+                                                        WriteLiteral("Member Support")
+                                                    Case SupportPlatform.CustomerContactSale
+                                                        WriteLiteral("Khách liên hệ Sale")
+                                                    Case Else
+                                                        WriteLiteral("<span class=""text-muted"">-</span>")
+                                                End Select
+                                            End Code
+                                        </div>
+                                        <div style="font-size: 0.75rem; color: #6b7280;">
+                                            @Code
+                                                If Not String.IsNullOrEmpty(item.SaleManagerName) Then
+                                                    WriteLiteral(item.SaleManagerName)
+                                                Else
+                                                    WriteLiteral("<span class=""text-muted"">-</span>")
+                                                End If
+                                            End Code
+                                        </div>
                                     </td>
-                                    <td>@item.CustomerName</td>
-                                    <td>
-                                        @Code
-                                            If Not String.IsNullOrEmpty(item.SoftwareName) Then
-                                                WriteLiteral(item.SoftwareName)
-                                            Else
-                                                WriteLiteral("<span class=""text-muted"">-</span>")
-                                            End If
-                                        End Code
+                                    <td style="white-space: normal;">
+                                        <div style="margin-bottom: 0.25rem; font-weight: 500;">
+                                            @item.CustomerName
+                                        </div>
+                                        <div style="font-size: 0.75rem; color: #6b7280;">
+                                            @Code
+                                                If Not String.IsNullOrEmpty(item.SoftwareName) Then
+                                                    WriteLiteral(item.SoftwareName)
+                                                Else
+                                                    WriteLiteral("<span class=""text-muted"">-</span>")
+                                                End If
+                                            End Code
+                                        </div>
                                     </td>
                                     <td style="max-width: 250px;">
                                         @Code
@@ -273,19 +290,27 @@ End Code
                                     </td>
                                     <td>
                                         <div class="btn-group" role="group">
-                                            <a href="@Url.Action("Details", "Tasks", New With {.id = item.Id})" class="btn btn-sm btn-info" title="Xem chi tiết">
+                                            <a href="@Url.Action("Details", "Tasks", New With {.id = item.Id})" class="btn btn-sm btn-outline-dark btn-action-dark" title="Xem chi tiết">
                                                 <i class="fas fa-eye"></i>
                                             </a>
-                                            <button type="button" class="btn btn-sm btn-outline-primary btn-save-task" data-id="@item.Id" data-saved="@item.IsSaved.ToString().ToLower()" title="@(If(item.IsSaved, "Bỏ lưu", "Lưu câu trả lời"))">
-                                                <i class="fas fa-bookmark @(If(item.IsSaved, "text-danger", ""))"></i>
+                                            <button type="button" class="btn btn-sm btn-outline-dark btn-action-dark btn-save-task" data-id="@item.Id" data-saved="@item.IsSaved.ToString().ToLower()" title="@(If(item.IsSaved, "Bỏ lưu", "Lưu câu trả lời"))">
+                                                <i class="@(If(item.IsSaved, "fas", "far")) fa-bookmark"></i>
                                             </button>
-                                            <a href="@Url.Action("Edit", "Tasks", New With {.id = item.Id})" class="btn btn-sm btn-warning" title="Chỉnh sửa">
+                                            <a href="@Url.Action("Edit", "Tasks", New With {.id = item.Id})" class="btn btn-sm btn-outline-dark btn-action-dark" title="Chỉnh sửa">
                                                 <i class="fas fa-edit"></i>
                                             </a>
-                                            <a href="@Url.Action("Delete", "Tasks", New With {.id = item.Id})" class="btn btn-sm btn-danger" title="Xóa" onclick="return confirm('Bạn có chắc chắn muốn xóa công việc này?');">
+                                            <button type="submit"
+                                                    class="btn btn-sm btn-outline-dark btn-action-dark"
+                                                    title="Xóa"
+                                                    form="deleteForm-@item.Id"
+                                                    onclick="return confirm('Bạn có chắc chắn muốn xóa công việc này?');">
                                                 <i class="fas fa-trash"></i>
-                                            </a>
+                                            </button>
                                         </div>
+                                        @Using Html.BeginForm("Delete", "Tasks", FormMethod.Post, New With {.id = "deleteForm-" & item.Id, .style = "display:none;"})
+                                            @Html.AntiForgeryToken()
+                                            @Html.Hidden("id", item.Id)
+                                        End Using
                                     </td>
                                 </tr>
                             Next
@@ -323,10 +348,10 @@ End Code
                             btn.data('saved', newSaved);
                             var icon = btn.find('i');
                             if (newSaved) {
-                                icon.addClass('text-danger');
+                                icon.removeClass('far').addClass('fas');
                                 btn.attr('title', 'Bỏ lưu');
                             } else {
-                                icon.removeClass('text-danger');
+                                icon.removeClass('fas').addClass('far');
                                 btn.attr('title', 'Lưu câu trả lời');
                             }
                         } else {

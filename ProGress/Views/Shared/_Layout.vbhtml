@@ -310,6 +310,8 @@
             min-height: 100vh;
             padding: 2rem;
             width: calc(100% - 70px);
+            max-width: 1800px;
+            margin-right: auto;
         }
         
         @@media (max-width: 768px) {
@@ -342,6 +344,22 @@
             .create-panel {
                 width: 100%;
                 left: 0;
+            }
+        }
+
+        @@media (max-width: 576px) {
+            .sidebar {
+                width: 60px;
+            }
+
+            .main-content {
+                margin-left: 60px;
+                width: calc(100% - 60px);
+                padding: 0.75rem;
+            }
+
+            .create-panel {
+                left: 60px;
             }
         }
 
@@ -400,6 +418,39 @@
             box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
         }
 
+        /* Action buttons: đồng đều màu đen (dùng cho nhóm nút xem/sửa/xóa/lưu) */
+        .btn-action-dark {
+            border-color: #111827 !important;
+            color: #111827 !important;
+            background: transparent !important;
+            box-shadow: none !important;
+        }
+
+        .btn-action-dark i {
+            color: inherit !important;
+        }
+
+        .btn-action-dark:hover,
+        .btn-action-dark:focus {
+            background: #111827 !important;
+            border-color: #111827 !important;
+            color: #ffffff !important;
+        }
+
+        .btn-action-dark:active {
+            background: #0b1220 !important;
+            border-color: #0b1220 !important;
+        }
+
+        /* Toast container */
+        .toast-container-fixed {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 11000;
+            max-width: calc(100vw - 2rem);
+        }
+
         .btn-info {
             background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
             border: none;
@@ -428,38 +479,41 @@
         }
 
         .status-badge {
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
+            padding: 0;
+            border-radius: 0;
             font-size: 0.85rem;
             font-weight: 600;
             display: inline-block;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            box-shadow: none;
+            background: transparent;
+            border: none;
+            color: #000000 !important;
         }
 
         .status-pending {
-            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-            color: #92400e;
+            background: transparent;
+            color: #000000 !important;
         }
 
         .status-inprogress {
-            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
-            color: #1e40af;
+            background: transparent;
+            color: #000000 !important;
         }
 
         .status-waiting {
-            background: linear-gradient(135deg, #fed7aa 0%, #fdba74 100%);
-            color: #9a3412;
+            background: transparent;
+            color: #000000 !important;
         }
 
         .status-completed {
-            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
-            color: #065f46;
-            border: 2px solid var(--primary-color);
+            background: transparent;
+            color: #000000 !important;
+            border: none;
         }
 
         .status-paused {
-            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
-            color: #991b1b;
+            background: transparent;
+            color: #000000 !important;
         }
 
         .kanban-column {
@@ -841,6 +895,23 @@
                         <span>Cài đặt</span>
                     </a>
                 </li>
+                @If Session("UserId") IsNot Nothing Then
+                    @<li class="nav-item">
+                        @Code
+                            Dim isProfileActive = If(ViewContext.RouteData.Values("controller").ToString() = "Account" AndAlso ViewContext.RouteData.Values("action").ToString() = "UserProfile", "active", "")
+                        End Code
+                        <a class="nav-link @isProfileActive" href="@Url.Action("UserProfile", "Account")" data-tooltip="Hồ sơ cá nhân">
+                            <i class="fas fa-user"></i>
+                            <span>Hồ sơ cá nhân</span>
+                        </a>
+                    </li>
+                    @<li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Logout", "Account")" data-tooltip="Đăng xuất">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Đăng xuất</span>
+                        </a>
+                    </li>
+                End If
             </ul>
         </nav>
     </aside>
@@ -876,6 +947,19 @@
     <div class="main-content">
         @RenderBody()
     </div>
+
+    @If TempData("WelcomeMessage") IsNot Nothing Then
+        @<div class="toast-container-fixed">
+            <div id="welcomeToast" class="toast align-items-center text-bg-dark border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                    <div class="toast-body">
+                        <i class="fas fa-check-circle me-2"></i>@TempData("WelcomeMessage")
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+    End If
 
     @Html.Partial("_Footer")
 
@@ -992,6 +1076,15 @@
                 initTooltips();
             }
         })();
+
+        // Show welcome toast (if exists)
+        document.addEventListener('DOMContentLoaded', function () {
+            var toastEl = document.getElementById('welcomeToast');
+            if (toastEl && window.bootstrap && bootstrap.Toast) {
+                var toast = bootstrap.Toast.getOrCreateInstance(toastEl, { delay: 3500 });
+                toast.show();
+            }
+        });
     </script>
     
     <style>
